@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:48:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/01 17:37:02 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:40:43 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	window_hook(int event, void *param)
 void run_game_loop(t_game *game)
 {
 	mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_WINDOW_EVENT, window_hook, game);
-	mlx_loop(game->mlx.mlx);
+    mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_KEYDOWN, key_hook, game);
+    mlx_add_loop_hook(game->mlx.mlx, render_frame, game);
+    mlx_loop(game->mlx.mlx);
 }
 

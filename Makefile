@@ -27,8 +27,11 @@ SRCS_DIR    = src
 SRCS        = $(SRCS_DIR)/main.c \
               $(SRCS_DIR)/init/init_mlx.c \
               $(SRCS_DIR)/init/map.c \
+			  $(SRCS_DIR)/init/init_image.c \
               $(SRCS_DIR)/error/ft_perror.c \
-              $(SRCS_DIR)/on_event/mlx_event.c
+              $(SRCS_DIR)/on_event/mlx_event.c \
+			  $(SRCS_DIR)/raystracing/to_3d.c \
+			  $(SRCS_DIR)/keyhook/keyhook.c \
 
 OBJ_DIR     = obj
 # Génère la structure des objets en miroir des sources

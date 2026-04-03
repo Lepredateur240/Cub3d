@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:26:56 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/01 17:22:38 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:22:41 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_data
 	double	planeY; //the 2d raycaster version of camera plane
 	double	time; //time of current frame
 	double	oldTime; //time of previous frame
+	int     **map;
 }			t_data;
 
 typedef struct s_view
@@ -46,6 +47,30 @@ typedef struct s_game
 	t_mlx	mlx;
 	t_view	view;
 }			t_game;
+
+typedef struct s_ray {
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	int		stepX;
+	int		stepY;
+	int		side;
+	int		hit;
+} 			t_ray;
+
+typedef struct s_perp
+{
+	double	perpWallDist;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+}			t_perp;
 
 
 #endif

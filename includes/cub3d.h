@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:29:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 14:07:17 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:41:07 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 #include "struct.h"
 #include "prototype.h"
 #include "keypad.h"
-#include "free.h"
-
+#include "../free/free.h"
+#include "color.h"
 
 
 #endif
