@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 19:45:08 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/03 21:05:29 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	to_3d(t_game *game);
 //main.c
 // Main entry point
 void	render_frame(void *param);
+void 	render_loop(void *param);
 
 #endif

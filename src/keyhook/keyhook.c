@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 18:36:44 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 20:00:28 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/03 21:11:32 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,40 @@ void	key_hook(int keycode, void *param)
 {
 	t_game	*game;
 
-	printf("Key pressed: %d\n", keycode);
+	//printf("Key pressed: %d\n", keycode);
 	game = (t_game *)param;
-	if (keycode == KEY_ESC || keycode == KEY_ESC)
+	if (keycode == KEY_ESC)
 		cleanup_and_exit(game);
 	move_player(game, keycode);
+	//render_frame((t_game *)game);
 }
 
 void    move_player(t_game *game, int keycode)
 {
-    double moveSpeed;
-    double rotSpeed;
+    double moveSpeed = 0.5;
+    double rotSpeed = 0.02;
     double oldDirX;
     double oldPlaneX;
 
-	moveSpeed = 0.1;
-	rotSpeed = 0.05;
-    // --- AVANCER (W ou Z) ---
-    if (keycode == KEY_W)
+	printf("BEFORE: posX=%.2f posY=%.2f\n", game->data.posX, game->data.posY);
+    // --- AVANCER (W) ---
+    if (keycode == KEY_W) // Ou KEY_W
     {
-        if (game->data.map[(int)game->data.posY][(int)(game->data.posX + game->data.dirX * moveSpeed)] == 0)
+        if (worldMap[(int)game->data.posY][(int)(game->data.posX + game->data.dirX * moveSpeed)] == 0)
             game->data.posX += game->data.dirX * moveSpeed;
-        if (game->data.map[(int)(game->data.posY + game->data.dirY * moveSpeed)][(int)game->data.posX] == 0)
+        if (worldMap[(int)(game->data.posY + game->data.dirY * moveSpeed)][(int)game->data.posX] == 0)
             game->data.posY += game->data.dirY * moveSpeed;
     }
     // --- RECULER (S) ---
     if (keycode == KEY_S)
     {
-        if (game->data.map[(int)game->data.posY][(int)(game->data.posX - game->data.dirX * moveSpeed)] == 0)
+        // 2. On remplace game->data.map par worldMap
+        if (worldMap[(int)game->data.posY][(int)(game->data.posX - game->data.dirX * moveSpeed)] == 0)
             game->data.posX -= game->data.dirX * moveSpeed;
-        if (game->data.map[(int)(game->data.posY - game->data.dirY * moveSpeed)][(int)game->data.posX] == 0)
+        if (worldMap[(int)(game->data.posY - game->data.dirY * moveSpeed)][(int)game->data.posX] == 0)
             game->data.posY -= game->data.dirY * moveSpeed;
     }
+    
     // --- ROTATION DROITE (D) ---
     if (keycode == KEY_D)
     {
@@ -58,7 +60,8 @@ void    move_player(t_game *game, int keycode)
         game->data.planeX = game->data.planeX * cos(-rotSpeed) - game->data.planeY * sin(-rotSpeed);
         game->data.planeY = oldPlaneX * sin(-rotSpeed) + game->data.planeY * cos(-rotSpeed);
     }
-    // --- ROTATION GAUCHE (A ou Q) ---
+    
+    // --- ROTATION GAUCHE (A) ---
     if (keycode == KEY_A)
     {
         oldDirX = game->data.dirX;
@@ -68,4 +71,5 @@ void    move_player(t_game *game, int keycode)
         game->data.planeX = game->data.planeX * cos(rotSpeed) - game->data.planeY * sin(rotSpeed);
         game->data.planeY = oldPlaneX * sin(rotSpeed) + game->data.planeY * cos(rotSpeed);
     }
+	printf("AFTER:  posX=%.2f posY=%.2f\n", game->data.posX, game->data.posY);
 }
