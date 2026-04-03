@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   free.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/01 15:29:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 14:07:17 by masenche         ###   ########.fr       */
+/*   Created: 2026/04/03 13:57:27 by masenche          #+#    #+#             */
+/*   Updated: 2026/04/03 14:02:39 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef FREE_H
+# define FREE_H
 
-#include <math.h>
-#include <stdio.h>
+#include <stdarg.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include "libft.h"
 
-#include "map.h"
-#include "struct.h"
-#include "prototype.h"
-#include "keypad.h"
-#include "free.h"
+typedef void	(*t_free_func)(va_list);
 
+typedef struct s_free_map
+{
+	char		specifier;
+	t_free_func	func;
+}				t_free_map;
 
+void	free_list(va_list args);
+void	free_str_array(va_list args);
+void	free_simple_ptr(va_list args);
 
 #endif

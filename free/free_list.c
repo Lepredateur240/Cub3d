@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/01 15:29:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 14:07:17 by masenche         ###   ########.fr       */
+/*   Created: 2026/04/03 13:59:48 by masenche          #+#    #+#             */
+/*   Updated: 2026/04/03 14:04:31 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-
-#include "map.h"
-#include "struct.h"
-#include "prototype.h"
-#include "keypad.h"
 #include "free.h"
 
+void	free_list(va_list args)
+{
+	t_list	**lst;
 
-
-#endif
+	lst = va_arg(args, t_list **);
+	if (lst && *lst)
+	{
+		ft_lstclear(lst, free);
+		*lst = NULL;
+	}
+}
