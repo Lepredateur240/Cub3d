@@ -6,27 +6,31 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:13:20 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/01 17:37:18 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:58:18 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	init_data_view(t_data *data, mlx_window_create_info *info)
+extern int worldMap[24][24];
+
+static void	init_data_view(t_game *game, mlx_window_create_info *info)
 {
-	data->posX = 22;
-	data->posY = 12;
-	data->dirX = -1;
-	data->dirY = 0;
-	data->planeX = 0;
-	data->planeY = 0.66;
-	data->time = 0;
-	data->oldTime = 0;
+	game->data.posX = 22;
+	game->data.posY = 12;
+	game->data.dirX = -1;
+	game->data.dirY = 0;
+	game->data.planeX = 0;
+	game->data.planeY = 0.66;
+	game->data.time = 0;
+	game->data.oldTime = 0;
 	info->width = 1280;
 	info->height = 1024;
 	info->title = "Cub3D";
 	info->is_fullscreen = false;
 	info->is_resizable = true;
+	game->view.width = info->width;
+	game->view.height = info->height;
 }
 
 static void	init_app(t_game *game, mlx_window_create_info *info)
@@ -46,9 +50,9 @@ void	init_mlx(t_game *game)
 {
 	mlx_window_create_info info;
 
-	ft_memset(&game->data, 0, sizeof(t_data));
+	ft_memset(game, 0, sizeof(t_game));
 	ft_memset(&info, 0, sizeof(mlx_window_create_info));
-	init_data_view(&game->data, &info);
+	init_data_view(game, &info);
 	init_app(game, &info);
 	run_game_loop(game);
 }

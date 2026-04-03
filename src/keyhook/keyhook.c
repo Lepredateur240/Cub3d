@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 18:36:44 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 18:38:55 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/03 20:00:28 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	key_hook(int keycode, void *param)
 {
 	t_game	*game;
 
+	printf("Key pressed: %d\n", keycode);
 	game = (t_game *)param;
-	if (keycode == KEY_ESC)
+	if (keycode == KEY_ESC || keycode == KEY_ESC)
 		cleanup_and_exit(game);
 	move_player(game, keycode);
 }

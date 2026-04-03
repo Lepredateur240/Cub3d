@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 19:02:31 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:45:08 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_image(t_game *game, t_ray *ray, t_perp *perp, int x);
 
 // map.c
 // Map
-extern int worldmap[24][24];
+extern int worldMap[24][24];
 
 
 // /on_event
@@ -46,6 +46,7 @@ void	window_hook(int event, void *param);
 // keyhook
 // keyhook.c
 // Key event handling
+
 void	key_hook(int keycode, void *param);
 void	move_player(t_game *game, int keycode);
 
