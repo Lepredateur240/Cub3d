@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:13:20 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 20:59:23 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 20:55:47 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	init_app(t_game *game, mlx_window_create_info *info)
 	game->mlx.mlx = mlx_init();
 	if (!game->mlx.mlx)
 		ft_perror("Failed to initialize MLX");
+	load_textures(game);
 	game->mlx.window = mlx_new_window(game->mlx.mlx, info);
 	if (!game->mlx.window)
 		ft_perror("Failed to create window");

@@ -6,13 +6,30 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 18:25:37 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 12:57:28 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 22:07:42 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 extern int worldMap[24][24];
+
+void	load_textures(t_game *game)
+{
+    int width;
+    int height;
+
+    // Assure-toi d'avoir un dossier "textures" à la racine de ton projet 
+    // avec tes 4 fichiers bien renommés en .jpg
+    game->data.tex_north = mlx_new_image_from_file(game->mlx.mlx, "texture/nord.jpg", &width, &height);
+    game->data.tex_south = mlx_new_image_from_file(game->mlx.mlx, "texture/sud.jpg", &width, &height);
+    game->data.tex_east = mlx_new_image_from_file(game->mlx.mlx, "texture/est.jpg", &width, &height);
+    game->data.tex_west = mlx_new_image_from_file(game->mlx.mlx, "texture/ouest.jpg", &width, &height);
+
+    // Sécurité : on vérifie que le chargement a bien fonctionné
+    if (!game->data.tex_north || !game->data.tex_south || !game->data.tex_east || !game->data.tex_west)
+        ft_perror("Erreur : Impossible de charger les textures JPG");
+}
 
 void	init_image(t_game *game, t_ray *ray, t_perp *perp, int x)
 {

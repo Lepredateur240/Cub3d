@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 13:12:47 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 20:57:08 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_mlx(t_game *game);
 
 // init_image.c
 void	init_image(t_game *game, t_ray *ray, t_perp *perp, int x);
+void	load_textures(t_game *game);
 
 // map.c
 // Map

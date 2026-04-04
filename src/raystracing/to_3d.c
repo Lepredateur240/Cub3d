@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:32:05 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 21:24:17 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 22:20:01 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void	PerpWallDist(t_ray *ray, t_game *game, t_perp *perp)
 	else
 		perp->perpWallDist = (ray->mapY - game->data.posY + (1 - ray->stepY) / 2) / ray->rayDirY;
 	perp->lineHeight = (int)(game->view.height / perp->perpWallDist);
+	
 	// Calcul des pixels de début et de fin de la ligne
 	perp->drawStart = -perp->lineHeight / 2 + game->view.height / 2;
 	if (perp->drawStart < 0)
@@ -91,26 +92,131 @@ static void	PerpWallDist(t_ray *ray, t_game *game, t_perp *perp)
 		perp->drawEnd = game->view.height - 1;
 }
 
+// NOUVELLE FONCTION : Gère le calcul et l'affichage de la bande de texture
+static void draw_textured_line(t_game *game, t_ray *ray, t_perp *perp, int x)
+{
+	void	*current_tex;
+	double	wallX;
+	int		texX;
+	int		texY;
+	double	step;
+	double	texPos;
+	int		y;
+	mlx_color		color;
+	
+	// --- PARAMÈTRES DE LA TEXTURE ---
+	// Assure-toi que ces valeurs correspondent à la taille réelle de tes images JPG
+	int texWidth = 1024;
+	int texHeight = 1024;
+
+	// =========================================================
+	// 1. CHOIX DE L'IMAGE SELON L'ORIENTATION DU MUR
+	// =========================================================
+	if (ray->side == 0)
+	{
+		if (ray->rayDirX > 0)
+			current_tex = game->data.tex_west;
+		else
+			current_tex = game->data.tex_east;
+	}
+	else
+	{
+		if (ray->rayDirY > 0)
+			current_tex = game->data.tex_south;
+		else
+			current_tex = game->data.tex_north;
+	}
+
+	// =========================================================
+	// 2. CALCUL DU POINT D'IMPACT EXACT SUR LE MUR (wallX)
+	// =========================================================
+	if (ray->side == 0)
+		wallX = game->data.posY + perp->perpWallDist * ray->rayDirY;
+	else
+		wallX = game->data.posX + perp->perpWallDist * ray->rayDirX;
+	wallX -= floor(wallX);
+
+	// =========================================================
+	// 3. CALCUL DE LA COLONNE DE L'IMAGE À DÉCOUPER (texX)
+	// =========================================================
+	texX = (int)(wallX * (double)texWidth);
+	
+	// Inversion de la texture pour certaines faces (évite l'effet miroir)
+	if (ray->side == 0 && ray->rayDirX > 0)
+		texX = texWidth - texX - 1;
+	if (ray->side == 1 && ray->rayDirY < 0)
+		texX = texWidth - texX - 1;
+
+	// =========================================================
+	// 4. DESSIN DE LA COLONNE À L'ÉCRAN (Plafond -> Mur -> Sol)
+	// =========================================================
+	
+	// --- PLAFOND ---
+	y = 0;
+	while (y < perp->drawStart)
+	{
+		// Couleur Bleu Ciel
+		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, y, COLOR_CEILING);
+		y++;
+	}
+
+	// --- MUR TEXTURÉ ---
+	step = 1.0 * texHeight / perp->lineHeight;
+	texPos = (perp->drawStart - game->view.height / 2.0 + perp->lineHeight / 2.0) * step;
+	
+	y = perp->drawStart;
+	while (y < perp->drawEnd)
+	{
+		texY = (int)texPos;
+		if (texY >= texHeight)
+			texY = texHeight - 1;
+		else if (texY < 0)
+			texY = 0;
+			
+		texPos += step;
+
+		// Récupération de la couleur du pixel sur l'image JPG
+		color = mlx_get_image_pixel(game->mlx.mlx, current_tex, texX, texY);
+
+		// Collage du pixel sur l'écran
+		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, y, color);
+		y++;
+	}
+
+	// --- SOL ---
+	y = perp->drawEnd;
+	while (y < game->view.height)
+	{
+		// Couleur Gris foncé
+		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, y, COLOR_FLOOR);
+		y++;
+	}
+}
+
 void	to_3d(t_game *game)
 {
-	int x;
+	int		x;
+	t_ray	ray;
+	t_perp	perp;
 
+	// Note : Assure-toi que cette fonction nettoie bien le buffer image et pas seulement la fenêtre, 
+	// sinon ajoute une petite boucle pour remplir le plafond et le sol sur game->mlx.image.
 	mlx_clear_window(game->mlx.mlx, game->mlx.window, COLOR_BLACK);
+	
 	x = 0;
 	while (x < game->view.width)
 	{
-		//calculate ray position and direction
-		t_ray ray;
-		t_perp perp;
-
-		ray.cameraX = 2 * x / (double)game->view.width - 1; //x-coordinate in camera space
+		ray.cameraX = 2 * x / (double)game->view.width - 1;
 		ray.rayDirX = game->data.dirX + game->data.planeX * ray.cameraX;
 		ray.rayDirY = game->data.dirY + game->data.planeY * ray.cameraX;
-		//which box of the map we're in
+		
 		dda(&ray, game);
 		launch_dda(&ray);
 		PerpWallDist(&ray, game, &perp);
-		init_image(game, &ray, &perp, x);
+		
+		// Appel de la nouvelle fonction d'affichage
+		draw_textured_line(game, &ray, &perp, x);
+		
 		x++;
 	}
 }

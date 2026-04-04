@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 18:32:04 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 19:00:00 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 22:02:19 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define COLOR_BLUE     (mlx_color){.rgba = 0x0000FFFF}
 
 /* --- Couleurs Cub3D (Ambiance) --- */
-# define COLOR_CEILING  (mlx_color){.rgba = 0x323232FF}    /* Gris foncé */
-# define COLOR_FLOOR    (mlx_color){.rgba = 0x646464FF} /* Gris clair */
+# define COLOR_CEILING  (mlx_color){.rgba = 0x87CEEB}    /* Gris foncé */
+# define COLOR_FLOOR    (mlx_color){.rgba = 0x555555} /* Gris clair */
 
 /* --- Couleurs de Murs (Effet d'ombrage) --- */
 // Face Est/Ouest (Pleine lumière)

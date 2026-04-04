@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:29:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 18:41:07 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 20:58:12 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "keypad.h"
 #include "../free/free.h"
 #include "color.h"
-
+#include "../mlx/includes/mlx_extended.h"
+#include "../mlx/includes/mlx_profile.h"
 
 #endif

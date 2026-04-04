@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:48:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 13:10:13 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 23:37:20 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 void	cleanup_and_exit(t_game *game)
 {
 	printf("Cleaning up resources and exiting...\n");
+	if (game->data.tex_north)
+		mlx_destroy_image(game->mlx.mlx, game->data.tex_north);
+	if (game->data.tex_south)
+		mlx_destroy_image(game->mlx.mlx, game->data.tex_south);
+	if (game->data.tex_east)
+		mlx_destroy_image(game->mlx.mlx, game->data.tex_east);
+	if (game->data.tex_west)
+		mlx_destroy_image(game->mlx.mlx, game->data.tex_west);
 	mlx_destroy_image(game->mlx.mlx, game->mlx.image);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.window);
 	mlx_destroy_context(game->mlx.mlx);
