@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:26:56 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 18:22:41 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 13:08:11 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_data
 	double	time; //time of current frame
 	double	oldTime; //time of previous frame
 	int     **map;
+	int keys[1024];
 }			t_data;
 
 typedef struct s_view

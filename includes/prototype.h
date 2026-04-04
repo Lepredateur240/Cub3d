@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 21:05:29 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 13:12:47 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	window_hook(int event, void *param);
 // keyhook
 // keyhook.c
 // Key event handling
-
-void	key_hook(int keycode, void *param);
-void	move_player(t_game *game, int keycode);
+void	key_hook_up(int keycode, void *param);
+void	key_hook_down(int keycode, void *param);
+void	update_player(t_game *game);
 
 // /raystracing
 // to_3d.c

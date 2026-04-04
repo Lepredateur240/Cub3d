@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:07:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 21:14:11 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 13:12:18 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void render_frame(void *param)
 	// 1. On lance le calcul du Raycasting
 	to_3d(game);
 
+	update_player(game);
 	// 2. On affiche l'image sur la fenêtre
 	// (L'ordre des paramètres dépend de ta version de MacroLibX)
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.window, game->mlx.image, 0, 0);
@@ -26,7 +27,6 @@ void render_frame(void *param)
 
 void 	render_loop(void *param)
 {
-	//printf("RENDER LOOP CALLED\n");
 	render_frame((t_game *)param);
 }
 

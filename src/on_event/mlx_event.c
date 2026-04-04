@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:48:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 21:12:44 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/04 13:10:13 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	cleanup_and_exit(t_game *game)
 
 void run_game_loop(t_game *game)
 {
-    mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_KEYDOWN, key_hook, game);
+    mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_KEYDOWN, key_hook_down, game);
+    mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_KEYUP, key_hook_up, game);
     mlx_add_loop_hook(game->mlx.mlx, render_loop, game);
 	
     mlx_loop(game->mlx.mlx);
