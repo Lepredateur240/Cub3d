@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:26:56 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 20:54:14 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:30:39 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,18 @@ typedef struct s_perp
 	int		drawEnd;
 }			t_perp;
 
+typedef struct s_draw
+{
+	double		wallX;
+	int			texX;
+	int			texY;
+	double		step;
+	double		texPos;
+	void		*current_tex;
+	int			y;
+	int			texWidth;
+	int			texHeight;
+	mlx_color	color;
+}			t_draw;
 
 #endif

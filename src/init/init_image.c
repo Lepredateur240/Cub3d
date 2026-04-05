@@ -6,13 +6,11 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 18:25:37 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 22:07:42 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/05 18:32:23 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-extern int worldMap[24][24];
 
 void	load_textures(t_game *game)
 {
@@ -46,7 +44,7 @@ void	init_image(t_game *game, t_ray *ray, t_perp *perp, int x)
     }
 
     // 2. Dessiner le mur
-	wallType = worldMap[ray->mapY][ray->mapX];
+	wallType = game->data.map[ray->mapY][ray->mapX];
 	if (wallType == 2)
 		color = COLOR_RED;
 	else if (wallType == 3)

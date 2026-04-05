@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 20:57:08 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:38:46 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ void	load_textures(t_game *game);
 
 // map.c
 // Map
-extern int worldMap[24][24];
+void init_map(t_game *game);
 
+// spawn.c
+// Player spawning
+void spawn_player(t_game *game, double x, double y, char o);
 
 // /on_event
 // mlx_event.c
@@ -55,6 +58,10 @@ void	update_player(t_game *game);
 // to_3d.c
 // Raycasting and 3D projection
 void	to_3d(t_game *game);
+
+// draw.c
+// Drawing functions
+void	draw_textured_line(t_game *game, t_ray *ray, t_perp *perp, int x);
 
 //main.c
 // Main entry point

@@ -6,22 +6,38 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:13:20 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 20:55:47 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/05 20:38:17 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-extern int worldMap[24][24];
+static void	check_spawn(t_game *game, int x, int y)
+{
+	char c = game->data.map[y][x];
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	{
+		spawn_player(game, x + 0.5, y + 0.5, c);
+		game->data.map[y][x] = 0;
+	}
+}
 
 static void	init_data_view(t_game *game, mlx_window_create_info *info)
 {
-	game->data.posX = 22;
-	game->data.posY = 12;
-	game->data.dirX = -1;
-	game->data.dirY = 0;
-	game->data.planeX = 0;
-	game->data.planeY = 0.66;
+	int		x;
+	int		y;
+
+	x = 0;
+	while (x < 24)
+	{
+		y = 0;
+		while (y < 24)
+		{
+			check_spawn(game, x, y);
+			y++;
+		}
+		x++;
+	}
 	game->data.time = 0;
 	game->data.oldTime = 0;
 	info->width = 1280;
@@ -53,6 +69,7 @@ void	init_mlx(t_game *game)
 
 	ft_memset(game, 0, sizeof(t_game));
 	ft_memset(&info, 0, sizeof(mlx_window_create_info));
+	init_map(game);
 	init_data_view(game, &info);
 	init_app(game, &info);
 	run_game_loop(game);

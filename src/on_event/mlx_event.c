@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:48:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 23:37:20 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/05 19:29:38 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	cleanup_and_exit(t_game *game)
 	if (game->data.tex_west)
 		mlx_destroy_image(game->mlx.mlx, game->data.tex_west);
 	mlx_destroy_image(game->mlx.mlx, game->mlx.image);
+	ft_ultimate_free("%i", game->data.map);
 	mlx_destroy_window(game->mlx.mlx, game->mlx.window);
 	mlx_destroy_context(game->mlx.mlx);
 	exit(0);
