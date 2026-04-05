@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 13:57:27 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 14:02:39 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/05 19:14:34 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdarg.h>
 #include <stdlib.h>
-#include "libft.h"
+#include "../../libft/libft.h"
 
 typedef void	(*t_free_func)(va_list);
 
@@ -28,5 +28,7 @@ typedef struct s_free_map
 void	free_list(va_list args);
 void	free_str_array(va_list args);
 void	free_simple_ptr(va_list args);
+void	free_int_array(va_list args);
+void	ft_ultimate_free(const char *fmt, ...);
 
 #endif

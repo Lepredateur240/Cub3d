@@ -18,9 +18,13 @@ LIBFT_A     = $(LIBFT_DIR)/libft.a
 MLX_DIR     = mlx
 MLX_LIB     = $(MLX_DIR)/libmlx.so
 
+# --- Configuration FREE ---
+FREE_DIR    = free
+FREE_A      = $(FREE_DIR)/ft_free.a
+
 # --- Inclusions ---
 # -I permet au compilateur de trouver les fichiers .h
-INCLUDES    = -I includes -I $(LIBFT_DIR) -I $(MLX_DIR)/includes
+INCLUDES    = -I includes -I $(LIBFT_DIR) -I $(MLX_DIR)/includes -I $(FREE_DIR)
 
 # --- Sources et Objets ---
 SRCS_DIR    = src
@@ -28,9 +32,11 @@ SRCS        = $(SRCS_DIR)/main.c \
               $(SRCS_DIR)/init/init_mlx.c \
               $(SRCS_DIR)/init/map.c \
 			  $(SRCS_DIR)/init/init_image.c \
+			  $(SRCS_DIR)/init/spawn.c \
               $(SRCS_DIR)/error/ft_perror.c \
               $(SRCS_DIR)/on_event/mlx_event.c \
 			  $(SRCS_DIR)/raystracing/to_3d.c \
+			  $(SRCS_DIR)/raystracing/draw.c \
 			  $(SRCS_DIR)/keyhook/keyhook.c \
 
 OBJ_DIR     = obj
@@ -50,13 +56,19 @@ endef
 
 # --- Règles Principales ---
 
-all: $(LIBFT_A) $(MLX_LIB) $(NAME)
+all: $(LIBFT_A) $(FREE_A) $(MLX_LIB) $(NAME)
 
 # Compilation de la Libft
 $(LIBFT_A):
 	@printf "$(CYAN)Compilation de la libft...$(RESET)\n"
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 	@printf "$(GREEN)✅ libft compilée !$(RESET)\n"
+
+# Compilation de ft_free
+$(FREE_A):
+	@printf "$(CYAN)Compilation de la free...$(RESET)\n"
+	@$(MAKE) -C $(FREE_DIR) > /dev/null
+	@printf "$(GREEN)✅ free compilée !$(RESET)\n"
 
 # Compilation de la MLX
 $(MLX_LIB):
@@ -67,7 +79,7 @@ $(MLX_LIB):
 # Linkage final (Méthode Directe)
 # On passe les chemins des .a et .so directement comme des fichiers objets
 $(NAME): $(OBJ_DIR) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(MLX_LIB) -lSDL2 -lm -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(FREE_A) $(LIBFT_A) $(MLX_LIB) -lSDL2 -lm -o $(NAME)
 	@printf "\n$(GREEN)✅ $(NAME) est prêt !$(RESET)\n"
 
 # Compilation des fichiers objets (.o)
@@ -90,7 +102,8 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
-	@printf "$(RED)🗑️  $(NAME) et libft.a supprimés.$(RESET)\n"
+	@$(MAKE) fclean -C $(FREE_DIR) > /dev/null
+	@printf "$(RED)🗑️  $(NAME), libft.a et ft_free.a supprimés.$(RESET)\n"
 
 re: fclean all
 

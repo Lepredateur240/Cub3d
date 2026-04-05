@@ -6,7 +6,7 @@
 /*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 13:20:09 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/03 14:05:07 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/05 19:15:02 by masenche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ static void	exec_free(char c, va_list args)
 {
 	int					i;
 	static t_free_map	map[] = {
-		{'p', free_simple_ptr},
+		{'s', free_simple_ptr},
 		{'a', free_str_array},
-		{'l', free_list}
+		{'l', free_list},
+		{'i', free_int_array}
 	};
 
 	i = 0;
-	while (i < 3)
+	while (i < 4)
 	{
 		if (map[i].specifier == c)
 		{
