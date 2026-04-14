@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototype.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/05 20:38:46 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:47:55 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_perror(const char *message);
 // /init
 // init_mlx.c
 // Initialization
-void	init_mlx(t_game *game);
+void	init_mlx(int argc, char** argv, t_game *game);
 
 // init_image.c
 void	init_image(t_game *game, t_ray *ray, t_perp *perp, int x);
@@ -33,7 +33,7 @@ void	load_textures(t_game *game);
 
 // map.c
 // Map
-void init_map(t_game *game);
+void init_map(int argc, char** argv, t_game *game);
 
 // spawn.c
 // Player spawning

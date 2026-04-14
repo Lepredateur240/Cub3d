@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:29:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/05 18:53:56 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:51:03 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 #include "color.h"
 #include "../mlx/includes/mlx_extended.h"
 #include "../mlx/includes/mlx_profile.h"
+#include "../gnl/get_next_line.h"
 
 #endif

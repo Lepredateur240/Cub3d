@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:07:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/04 13:12:18 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:48:05 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void 	render_loop(void *param)
 	render_frame((t_game *)param);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_game	game;
 
-	init_mlx(&game);
+	init_mlx(argc, argv, &game);
 	return 0;
 }

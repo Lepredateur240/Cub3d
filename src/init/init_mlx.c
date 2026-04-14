@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:13:20 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/05 20:38:17 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/14 10:46:48 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ static void	init_app(t_game *game, mlx_window_create_info *info)
 		ft_perror("Failed to create image");
 }
 
-void	init_mlx(t_game *game)
+void	init_mlx(int argc, char** argv, t_game *game)
 {
 	mlx_window_create_info info;
 
 	ft_memset(game, 0, sizeof(t_game));
 	ft_memset(&info, 0, sizeof(mlx_window_create_info));
-	init_map(game);
+	init_map(argc, argv, game);
 	init_data_view(game, &info);
 	init_app(game, &info);
 	run_game_loop(game);
