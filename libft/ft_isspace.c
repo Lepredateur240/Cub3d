@@ -6,11 +6,11 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:33:07 by algasnie          #+#    #+#             */
-/*   Updated: 2026/02/05 15:49:47 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:06:07 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isspace(int entry)
 {
-	return (entry == ' ' || (entry >= 9 && entry <= 13));
+	return (entry == ' ' || (entry >= 11 && entry <= 13));
 }

@@ -24,13 +24,15 @@ FREE_A      = $(FREE_DIR)/ft_free.a
 
 # --- Inclusions ---
 # -I permet au compilateur de trouver les fichiers .h
-INCLUDES    = -I includes -I $(LIBFT_DIR) -I $(MLX_DIR)/includes -I $(FREE_DIR)
+INCLUDES    = -I includes -I $(LIBFT_DIR) -I $(MLX_DIR)/includes -I $(FREE_DIR) -I src/gnl
 
 # --- Sources et Objets ---
 SRCS_DIR    = src
 SRCS        = $(SRCS_DIR)/main.c \
               $(SRCS_DIR)/init/init_mlx.c \
               $(SRCS_DIR)/init/map.c \
+			  $(SRCS_DIR)/init/map_texture.c \
+			  $(SRCS_DIR)/init/map_color.c \
 			  $(SRCS_DIR)/init/init_image.c \
 			  $(SRCS_DIR)/init/spawn.c \
               $(SRCS_DIR)/error/ft_perror.c \
@@ -38,9 +40,10 @@ SRCS        = $(SRCS_DIR)/main.c \
 			  $(SRCS_DIR)/raystracing/to_3d.c \
 			  $(SRCS_DIR)/raystracing/draw.c \
 			  $(SRCS_DIR)/keyhook/keyhook.c \
+			  $(SRCS_DIR)/gnl/get_next_line.c \
 
-OBJ_DIR     = obj
 # Génère la structure des objets en miroir des sources
+OBJ_DIR     = obj
 OBJS        = $(SRCS:$(SRCS_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # --- Logique de la barre de progression ---

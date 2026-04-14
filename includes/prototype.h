@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/14 10:47:55 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:18:03 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,28 @@
 // Error handling
 void	ft_perror(const char *message);
 
+//gnl
+//gnl.c
+char	*get_next_line(int fd);
 
 // /init
 // init_mlx.c
 // Initialization
-void	init_mlx(int argc, char** argv, t_game *game);
+void	init_mlx(char** argv, t_game *game);
 
 // init_image.c
 void	init_image(t_game *game, t_ray *ray, t_perp *perp, int x);
 void	load_textures(t_game *game);
 
+//map_color.c
+int handle_color(t_game *game, char* line);
+
+//map_texture.c
+int handle_texture(t_game *game, char* line);
+
 // map.c
 // Map
-void init_map(int argc, char** argv, t_game *game);
+int init_map(char** argv, t_game *game);
 
 // spawn.c
 // Player spawning

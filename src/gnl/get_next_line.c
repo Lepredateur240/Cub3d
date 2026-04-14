@@ -6,13 +6,13 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 19:58:32 by algasnie          #+#    #+#             */
-/*   Updated: 2025/11/06 12:56:52 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:28:43 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "cub3d.h"
 
-static char	*ft_read_fd(int fd, char *buffer, char *tmp)
+static char	*ft_read_fd(int fd, char *buffer, char *tmp, int buffer_size)
 {
 	int		size_read;
 	char	*new_tmp;
@@ -20,7 +20,7 @@ static char	*ft_read_fd(int fd, char *buffer, char *tmp)
 	size_read = 1;
 	while (!ft_strchr(tmp, '\n') && size_read > 0)
 	{
-		size_read = read(fd, buffer, BUFFER_SIZE);
+		size_read = read(fd, buffer, buffer_size);
 		if (size_read == -1)
 		{
 			free(tmp);
@@ -78,13 +78,17 @@ char	*get_next_line(int fd)
 	static char	*tmp;
 	char		*line;
 	char		*buffer;
+	int			buffer_size;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	buffer_size = 4096;
+	if (fd < 0 || buffer_size <= 0)
 		return (NULL);
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!tmp)
+		tmp = ft_strdup("");
+	buffer = malloc(sizeof(char) * (buffer_size + 1));
 	if (!buffer)
 		return (NULL);
-	tmp = ft_read_fd(fd, buffer, tmp);
+	tmp = ft_read_fd(fd, buffer, tmp, buffer_size);
 	free(buffer);
 	if (!tmp)
 		return (NULL);

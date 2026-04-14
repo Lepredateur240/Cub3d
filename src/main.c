@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:07:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/14 10:48:05 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/14 14:05:44 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int main(int argc, char **argv)
 {
 	t_game	game;
 
-	init_mlx(argc, argv, &game);
-	return 0;
+	if (argc != 2)
+		return (1);
+	init_mlx(argv, &game);
+	return (0);
 }

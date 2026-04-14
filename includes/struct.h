@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:26:56 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/05 20:30:39 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/14 16:33:15 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef struct s_data
 	double	oldTime; //time of previous frame
 	int     **map;
 	int keys[1024];
+
+	char	*path_text_north;
+	char	*path_text_south;
+	char	*path_text_west;
+	char	*path_text_east;
+	
+	mlx_color	color_floor;
+	mlx_color	color_ceiling;
+	
 	void	*tex_north;
 	void	*tex_south;
 	void	*tex_east;
