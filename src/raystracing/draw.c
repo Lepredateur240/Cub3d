@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 19:30:21 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/05 20:39:28 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/15 16:48:51 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void calculate_texture_x(t_ray *ray, t_draw *draw)
 {
 	draw->wallX -= floor(draw->wallX);
 	draw->texX = (int)(draw->wallX * (double)draw->texWidth);
-	if (ray->side == 0 && ray->rayDirX > 0)
+	if (ray->side == 0 && ray->rayDirX < 0)
 		draw->texX = draw->texWidth - draw->texX - 1;
-	if (ray->side == 1 && ray->rayDirY < 0)
+	if (ray->side == 1 && ray->rayDirY > 0)
 		draw->texX = draw->texWidth - draw->texX - 1;
 }
 
@@ -29,9 +29,9 @@ static void	texture_mapping(t_game *game, t_ray *ray, t_perp *perp, t_draw *draw
 	if (ray->side == 0)
 	{
 		if (ray->rayDirX > 0)
-			draw->current_tex = game->data.tex_west;
-		else
 			draw->current_tex = game->data.tex_east;
+		else
+			draw->current_tex = game->data.tex_west;
 	}
 	else
 	{
@@ -55,7 +55,7 @@ static void	draw_wall_ceiling(t_game *game, t_perp *perp, int x, t_draw *draw)
 	while (draw->y < perp->drawStart)
 	{
 		// Couleur Bleu Ciel
-		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, draw->y, COLOR_CEILING);
+		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, draw->y, game->data.color_ceiling);
 		draw->y++;
 	}
 	// --- MUR TEXTURÉ ---
@@ -81,17 +81,11 @@ void	draw_textured_line(t_game *game, t_ray *ray, t_perp *perp, int x)
 	t_draw draw;
 
 	texture_mapping(game, ray, perp, &draw);
-	draw.texX = (int)(draw.wallX * (double)draw.texWidth);
-	// Inversion de la texture pour certaines faces
-	if (ray->side == 0 && ray->rayDirX > 0)
-		draw.texX = draw.texWidth - draw.texX - 1;
-	if (ray->side == 1 && ray->rayDirY < 0)
-		draw.texX = draw.texWidth - draw.texX - 1;
 	draw_wall_ceiling(game, perp, x, &draw);
 	draw.y = perp->drawEnd;
 	while (draw.y < game->view.height)
 	{
-		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, draw.y, COLOR_FLOOR);
+		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, draw.y, game->data.color_floor);
 		draw.y++;
 	}
 }

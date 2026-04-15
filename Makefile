@@ -8,7 +8,7 @@ RESET       = \033[0m
 # --- Configuration du Projet ---
 NAME        = cub3D
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g -fsanitize=undefined,address
+CFLAGS      = -Wall -Wextra -Werror
 
 # --- Configuration LIBFT ---
 LIBFT_DIR   = libft
