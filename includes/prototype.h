@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/14 16:18:03 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/15 11:38:36 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ void	init_mlx(char** argv, t_game *game);
 // init_image.c
 void	init_image(t_game *game, t_ray *ray, t_perp *perp, int x);
 void	load_textures(t_game *game);
+
+//handle_map.c
+int handle_map(t_game *game, char* line);
+
+//copy_map.c
+int copy_map(t_game *game);
+
+//verify_map.c
+int verify_map(t_game *game);
 
 //map_color.c
 int handle_color(t_game *game, char* line);

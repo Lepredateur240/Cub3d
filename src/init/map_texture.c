@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/14 16:19:57 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:45:46 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ int handle_texture(t_game *game, char* line)
 		write(2, "Error\nInvalid setting\n", 23);
 		return (1);
 	}
-	return (0);
+	return (0); 
 }

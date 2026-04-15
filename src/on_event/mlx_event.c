@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_event.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:48:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/05 19:29:38 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/15 14:48:39 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void run_game_loop(t_game *game)
     mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_KEYDOWN, key_hook_down, game);
     mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_KEYUP, key_hook_up, game);
     mlx_add_loop_hook(game->mlx.mlx, render_loop, game);
-	
     mlx_loop(game->mlx.mlx);
 }
 

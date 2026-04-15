@@ -8,7 +8,7 @@ RESET       = \033[0m
 # --- Configuration du Projet ---
 NAME        = cub3D
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror
+CFLAGS      = -Wall -Wextra -Werror -g -fsanitize=undefined,address
 
 # --- Configuration LIBFT ---
 LIBFT_DIR   = libft
@@ -31,6 +31,9 @@ SRCS_DIR    = src
 SRCS        = $(SRCS_DIR)/main.c \
               $(SRCS_DIR)/init/init_mlx.c \
               $(SRCS_DIR)/init/map.c \
+			  $(SRCS_DIR)/init/handle_map.c \
+			  $(SRCS_DIR)/init/verify_map.c \
+			  $(SRCS_DIR)/init/copy_map.c \
 			  $(SRCS_DIR)/init/map_texture.c \
 			  $(SRCS_DIR)/init/map_color.c \
 			  $(SRCS_DIR)/init/init_image.c \

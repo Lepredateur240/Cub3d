@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/14 17:24:09 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/15 15:15:53 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,6 @@ static int is_empty_line(char *line)
 		i++;
 	}
 	return (1);
-}
-
-static int handle_map(t_game *game, char* line)
-{
-	printf("handle map: %s", line);
-
-	(void)game;
-	(void)line;
-	
-	return (0);
 }
 
 static int read_cub_file(t_game *game, int fd)
@@ -100,29 +90,6 @@ static int read_cub_file(t_game *game, int fd)
 int init_map(char** argv, t_game *game)
 {
 	int fd;
-	// int i;
-	// int y;
-
-	// i = 0;
-	// game->data.map = malloc(sizeof(int *) * 26);
-	// while (i < 24)
-	// {
-	// 	game->data.map[i] = malloc(sizeof(int) * 24);
-	// 	i++;
-	// }
-	// i = 0;
-	// while (i < 24)
-	// {
-	// 	y = 0;
-	// 	while (y < 24)
-	// 	{
-	// 		game->data.map[i][y] = worldMap[i][y];
-	// 		y++;
-	// 	}
-	// 	i++;
-	// }
-	// game->data.map[25] = NULL; // Mur rouge
-
 	
 	if (verify_cub_file(argv[1], &fd))
 		return (1);
@@ -130,9 +97,38 @@ int init_map(char** argv, t_game *game)
 	if (read_cub_file(game, fd))
 		return (1);
 
-	printf("\n\nnorth: %s\nsouth: %s\nwest: %s\neast: %s\n", game->data.path_text_north, game->data.path_text_south, game->data.path_text_west, game->data.path_text_east);
+	if (verify_map(game))
+		return (1);
+
+	if (copy_map(game))
+		return (1);
+
+	printf("north: %s\nsouth: %s\nwest: %s\neast: %s\n", game->data.path_text_north, game->data.path_text_south, game->data.path_text_west, game->data.path_text_east);
 	printf("ceilling: %d,%d,%d\n", game->data.color_ceiling.r, game->data.color_ceiling.g, game->data.color_ceiling.b);
 	printf("floor: %d,%d,%d\n", game->data.color_floor.r, game->data.color_floor.g, game->data.color_floor.b);
 
-	exit(0);
+	int i = 0;
+
+	while (game->data.map_tmp[i])
+	{
+		printf("%s", game->data.map_tmp[i]);
+		i++;
+	}
+	printf("\n\n");
+
+	int j;
+
+	i = 0;
+	while (game->data.map[i])
+	{
+		j = 0;
+		while (j < game->data.map_width)
+		{
+			printf("%d", game->data.map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+	return (0);
 }
