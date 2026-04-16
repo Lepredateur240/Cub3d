@@ -221,3 +221,24 @@
    fun:start_thread
    fun:clone
 }
+{
+   mlx_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*libmlx.so*
+}
+{
+   libgpg_error_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*libgpg-error.so*
+}
+{
+   libstdc++_reachable
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*libstdc++.so*
+}

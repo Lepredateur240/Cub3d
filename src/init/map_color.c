@@ -6,13 +6,13 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 10:20:29 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 11:25:13 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int verify_split(char **split)
+static int	verify_split(char **split)
 {
 	int	count;
 	int	len;
@@ -34,7 +34,7 @@ static int verify_split(char **split)
 	return (0);
 }
 
-static int verify_color(char *color)
+static int	verify_color(char *color)
 {
 	int	commas;
 	int	i;
@@ -45,16 +45,18 @@ static int verify_color(char *color)
 	{
 		if (color[i] == ',')
 			commas++;
+		if (!ft_isdigit(color[i]) && color[i] != ',')
+			return (1);
 		i++;
 	}
 	return (commas != 2);
 }
 
-static int set_color(t_game *game, char *color, char *key)
+static int	set_color(t_game *game, char *color, char *key)
 {
 	mlx_color	*target;
 	char		**split;
-	
+
 	if (verify_color(color))
 		return (1);
 	if (ft_strncmp(key, "F", 1) == 0)
@@ -76,15 +78,14 @@ static int set_color(t_game *game, char *color, char *key)
 	target->a = 255;
 	ft_ultimate_free("%s", &split);
 	return (0);
-	
 }
 
-static void handle_color_param(t_game *game, char* line, char *key, int *error)
+static void	handle_color_param(t_game *game, char *line, char *key, int *error)
 {
-	int	i;
-	int	j;
-	char *color;
-	
+	int		i;
+	int		j;
+	char	*color;
+
 	i = 0;
 	if (!ft_isspace(line[i]))
 		return ;
@@ -98,19 +99,19 @@ static void handle_color_param(t_game *game, char* line, char *key, int *error)
 	color = ft_substr(line, i, j - i);
 	if (!color)
 		return ;
-	while(line[j] && ft_isspace(line[j]))
+	while (line[j] && ft_isspace(line[j]))
 		j++;
 	if (line[j] && line[j] != '\n')
 		return ;
 	if (set_color(game, color, key))
 		return ;
-	*error = 0;	
+	*error = 0;
 }
 
-int handle_color(t_game *game, char* line)
+int	handle_color(t_game *game, char *line)
 {
 	int	i;
-	int error;
+	int	error;
 
 	i = 0;
 	error = 1;

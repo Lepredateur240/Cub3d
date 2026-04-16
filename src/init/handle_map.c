@@ -6,15 +6,15 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 11:05:28 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 11:23:21 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int count_line(char **map_tmp)
+static int	count_line(char **map_tmp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!map_tmp)
@@ -22,15 +22,14 @@ static int count_line(char **map_tmp)
 	while (map_tmp[i])
 		i++;
 	return (i);
-	
 }
 
-int	save_map_tmp(t_game *game, char* line)
+int	save_map_tmp(t_game *game, char *line)
 {
-	int nb_line;
-	int	i;
+	int		nb_line;
+	int		i;
 	char	**new_tab;
-	
+
 	nb_line = count_line(game->data.map_tmp);
 	new_tab = malloc(sizeof(char *) * (nb_line + 2));
 	if (!new_tab)
@@ -53,7 +52,7 @@ int	save_map_tmp(t_game *game, char* line)
 	return (0);
 }
 
-int handle_map(t_game *game, char* line)
+int	handle_map(t_game *game, char *line)
 {
 	if (line)
 	{

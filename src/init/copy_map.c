@@ -6,26 +6,23 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 15:22:41 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 11:21:18 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void height_width(t_game *game)
+static void	height_width(t_game *game)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (game->data.map_tmp[i])
 	{
 		j = 0;
 		while (game->data.map_tmp[i][j] && game->data.map_tmp[i][j] != '\n')
-		{
-			
 			j++;
-		}
 		if (j > game->data.map_width)
 			game->data.map_width = j;
 		i++;
@@ -33,14 +30,13 @@ static void height_width(t_game *game)
 	game->data.map_height = i;
 }
 
-static int alloc_map(t_game *game)
+static int	alloc_map(t_game *game)
 {
 	int	i;
 
 	game->data.map = malloc(sizeof(int *) * (game->data.map_height + 1));
 	if (!game->data.map)
 		return (1);
-	
 	i = 0;
 	while (i < game->data.map_height)
 	{
@@ -57,43 +53,41 @@ static int alloc_map(t_game *game)
 	return (0);
 }
 
-static int tmp_to_int(t_game *game)
+static int	tmp_to_int(t_game *game)
 {
 	int	i;
 	int	j;
 	int	line_len;
 
-	i = 0;
-	while (i < game->data.map_height)
+	i = -1;
+	while (++i < game->data.map_height)
 	{
-		j = 0;
+		j = -1;
 		line_len = ft_strlen(game->data.map_tmp[i]);
-		while (j < game->data.map_width)
+		while (++j < game->data.map_width)
 		{
+			game->data.map[i][j] = 1;
 			if (j < line_len && game->data.map_tmp[i][j] == '0')
 				game->data.map[i][j] = 0;
-			else if (j < line_len && ft_strchr("NSEW", game->data.map_tmp[i][j]))
+			else if (j < line_len
+				&& ft_strchr("NSEW", game->data.map_tmp[i][j]))
 			{
-				spawn_player(game, (double)j, (double)i, game->data.map_tmp[i][j]);
+				spawn_player(game, (double)j, (double)i,
+					game->data.map_tmp[i][j]);
 				game->data.map[i][j] = 0;
 			}
-			else
-				game->data.map[i][j] = 1;
-			j++;
 		}
-		i++;
 	}
 	game->data.map[i] = NULL;
 	return (0);
 }
 
-int copy_map(t_game *game)
+int	copy_map(t_game *game)
 {
 	height_width(game);
 	if (alloc_map(game))
 		return (1);
 	if (tmp_to_int(game))
-		return (1);;
-
+		return (1);
 	return (0);
 }

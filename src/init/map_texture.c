@@ -6,30 +6,40 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 15:45:46 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 11:26:33 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	set_texture_path(t_game *game, char *path, char *key)
+static int	set_texture_path(t_game *game, char *path, char *key)
 {
+	char	**target;
+
+	target = NULL;
 	if (strncmp(key, "NO", 2) == 0)
-		game->data.path_text_north = path;
+		target = &game->data.path_text_north;
 	else if (strncmp(key, "SO", 2) == 0)
-		game->data.path_text_south= path;
+		target = &game->data.path_text_south;
 	else if (strncmp(key, "WE", 2) == 0)
-		game->data.path_text_west = path;
+		target = &game->data.path_text_west;
 	else if (strncmp(key, "EA", 2) == 0)
-		game->data.path_text_east = path;	
+		target = &game->data.path_text_east;
+	if (target && !*target)
+	{
+		*target = path;
+		return (0);
+	}
+	else
+		return (1);
 }
 
-static void handle_texture_path(t_game *game, char* line, char *key, int *error)
+static void	handle_texture_path(t_game *game, char *line, char *key, int *error)
 {
-	int	i;
-	int	j;
-	char *path;
-	
+	int		i;
+	int		j;
+	char	*path;
+
 	i = 0;
 	if (!ft_isspace(line[i]))
 		return ;
@@ -43,18 +53,20 @@ static void handle_texture_path(t_game *game, char* line, char *key, int *error)
 	path = ft_substr(line, i, j - i);
 	if (!path)
 		return ;
-	while(line[j] && ft_isspace(line[j]))
+	while (line[j] && ft_isspace(line[j]))
 		j++;
 	if (line[j] && line[j] != '\n')
 		return ;
-	set_texture_path(game, path, key);
-	*error = 0;	
+	if (set_texture_path(game, path, key))
+		*error = 1;
+	else
+		*error = 0;
 }
 
-int handle_texture(t_game *game, char* line)
+int	handle_texture(t_game *game, char *line)
 {
 	int	i;
-	int error;
+	int	error;
 
 	i = 0;
 	error = 1;
@@ -73,5 +85,5 @@ int handle_texture(t_game *game, char* line)
 		write(2, "Error\nInvalid setting\n", 23);
 		return (1);
 	}
-	return (0); 
+	return (0);
 }
