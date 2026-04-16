@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 12:12:22 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 10:10:31 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,51 @@ static int verify_char_map(t_game *game)
 			return (1);
 	return (0);
 }
+static int is_walkable(char c)
+{
+	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+}
+static int verify_border(t_game *game)
+{
+	int		i;
+	int		j;
 
-// static int verify_border(t_game *game)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while (game->data.map_tmp[i])
-// 	{
-// 		j = 0;
-// 		while (game->data.map_tmp[i][j])
-// 		{
-			
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	return (0);
-// }
+	i = 0;
+	while (game->data.map_tmp[i])
+	{
+		j = 0;
+		while (game->data.map_tmp[i][j])
+		{
+			if (is_walkable(game->data.map_tmp[i][j]))
+			{
+				if (i == 0 || j >= (int)ft_strlen(game->data.map_tmp[i - 1]) || ft_isspace(game->data.map_tmp[i - 1][j]))
+					return (1);
+				if (game->data.map_tmp[i +1] == NULL || j >= (int)ft_strlen(game->data.map_tmp[i + 1]) || ft_isspace(game->data.map_tmp[i + 1][j]))
+					return (1);
+				if (j == 0 || ft_isspace(game->data.map_tmp[i][j - 1]))
+					return (1);
+				if (game->data.map_tmp[i][j + 1] == '\0' || ft_isspace(game->data.map_tmp[i][j + 1]))
+					return (1);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
 
 int verify_map(t_game *game)
 {
 	if (verify_char_map(game))
+	{
+		write(2, "Error\nInvalid map\n", 19);
 		return (1);
+	}
 
-	// if (verify_border(game))
-	// 	return (1);
-
+	if (verify_border(game))
+	{
+		write(2, "Error\nInvalid map\n", 19);
+		return (1);
+	}
 	return (0);
 }
