@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/14 17:35:54 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 10:20:29 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int handle_color(t_game *game, char* line)
 		handle_color_param(game, &line[i + 1], "C", &error);
 	if (error == 1)
 	{
-		write(2, "Error\nInvalid setting\n", 23);
+		write(2, "Error\nInvalid color setting\n", 29);
 		return (1);
 	}
 	return (0);

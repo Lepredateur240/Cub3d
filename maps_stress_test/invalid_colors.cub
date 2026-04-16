@@ -1,0 +1,10 @@
+NO ./texture/nord_debug.jpg
+SO ./texture/sud_debug.jpg
+WE ./texture/ouest_debug.jpg
+EA ./texture/est_debug.jpg
+F 256,0,0
+C 0,0,-1
+
+111
+1N1
+111

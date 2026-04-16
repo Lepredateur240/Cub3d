@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 15:15:53 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 10:28:34 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int read_cub_file(t_game *game, int fd)
 		if (!line)
 			break ;
 		line_len = ft_strlen(line);
-		if (is_empty_line(line))
+		if (is_empty_line(line) && map == 0)
 		{
 			free(line);
 			continue ;

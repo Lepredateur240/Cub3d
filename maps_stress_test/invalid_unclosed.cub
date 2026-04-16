@@ -1,0 +1,13 @@
+NO ./texture/nord_debug.jpg
+SO ./texture/sud_debug.jpg
+WE ./texture/ouest_debug.jpg
+EA ./texture/est_debug.jpg
+F 20,20,20
+C 200,200,200
+
+111111
+100001
+100001
+100000
+111111
+N

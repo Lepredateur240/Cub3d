@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 18:25:37 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 13:38:37 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 10:35:08 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,15 @@ void	load_textures(t_game *game)
 	
 	if (game->data.path_text_north)
 		game->data.tex_north = mlx_new_image_from_file(game->mlx.mlx, game->data.path_text_north, &width, &height);
-	else
-		game->data.tex_north = mlx_new_image_from_file(game->mlx.mlx, "texture/nord.jpg", &width, &height);
 	
 	if (game->data.path_text_south)
 		game->data.tex_south = mlx_new_image_from_file(game->mlx.mlx, game->data.path_text_south, &width, &height);
-	else
-		game->data.tex_south = mlx_new_image_from_file(game->mlx.mlx, "texture/sud.jpg", &width, &height);
 	
 	if (game->data.path_text_east)
 		game->data.tex_east = mlx_new_image_from_file(game->mlx.mlx, game->data.path_text_east, &width, &height);
-	else
-		game->data.tex_east = mlx_new_image_from_file(game->mlx.mlx, "texture/est.jpg", &width, &height);
 
 	if (game->data.path_text_west)
 		game->data.tex_west = mlx_new_image_from_file(game->mlx.mlx, game->data.path_text_west, &width, &height);
-	else
-		game->data.tex_west = mlx_new_image_from_file(game->mlx.mlx, "texture/ouest.jpg", &width, &height);
 
 	// Sécurité : on vérifie que le chargement a bien fonctionné
 	if (!game->data.tex_north || !game->data.tex_south || !game->data.tex_east || !game->data.tex_west)
