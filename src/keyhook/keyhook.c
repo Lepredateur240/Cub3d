@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhook.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 18:36:44 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/05 20:41:55 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/16 17:56:23 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	key_hook_down(int keycode, void *param)
 {
 	t_game	*game = (t_game *)param;
 
-	printf("Key down: %d\n", keycode);
 	if (keycode == KEY_ESC)
 		cleanup_and_exit(game);
 	if (keycode >= 0 && keycode < 1024)
@@ -61,7 +60,7 @@ static void	rotate_player(t_game *game, double rotSpeed)
 void	update_player(t_game *game)
 {
 	double	moveSpeed = 0.05;
-	double	rotSpeed = 0.03;
+	double	rotSpeed = 0.05;
 
 	if (game->data.keys[KEY_W]) // Ou KEY_W
 	{

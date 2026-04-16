@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: masenche <masenche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:32:05 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/05 20:36:32 by masenche         ###   ########.fr       */
+/*   Updated: 2026/04/16 15:47:19 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,13 @@ static void	PerpWallDist(t_ray *ray, t_game *game, t_perp *perp)
 }
 void	to_3d(t_game *game)
 {
-	int		x;
-	t_ray	ray;
-	t_perp	perp;
+	int			x;
+	t_ray		ray;
+	t_perp		perp;
+	mlx_color	black;
 
-	mlx_clear_window(game->mlx.mlx, game->mlx.window, COLOR_BLACK);
+	black.rgba = 0x000000FF;
+	mlx_clear_window(game->mlx.mlx, game->mlx.window, black);
 	x = 0;
 	while (x < game->view.width)
 	{

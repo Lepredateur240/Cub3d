@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 11:38:36 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 18:00:52 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 // ft_perror.c
 // Error handling
 void	ft_perror(const char *message);
+void	ft_free_init(t_game *game, char *error);
 
 //gnl
 //gnl.c
@@ -62,7 +63,6 @@ void spawn_player(t_game *game, double x, double y, char o);
 // Game loop
 void	run_game_loop(t_game *game);
 void	cleanup_and_exit(t_game *game);
-void	window_hook(int event, void *param);
 
 
 // keyhook

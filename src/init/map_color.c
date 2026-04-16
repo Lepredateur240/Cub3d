@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 11:25:13 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 17:09:42 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,25 @@ static int	set_color(t_game *game, char *color, char *key)
 	mlx_color	*target;
 	char		**split;
 
-	if (verify_color(color))
+	if (!color || verify_color(color))
 		return (1);
 	if (ft_strncmp(key, "F", 1) == 0)
 		target = &game->data.color_floor;
 	else
 		target = &game->data.color_ceiling;
 	split = ft_split(color, ',');
-	free(color);
 	if (!split)
 		return (1);
 	if (verify_split(split))
 	{
-		ft_ultimate_free("%s", &split);
+		ft_ultimate_free("%a", &split);
 		return (1);
 	}
 	target->r = ft_atoi(split[0]);
 	target->g = ft_atoi(split[1]);
 	target->b = ft_atoi(split[2]);
 	target->a = 255;
-	ft_ultimate_free("%s", &split);
+	ft_ultimate_free("%a", &split);
 	return (0);
 }
 
@@ -97,15 +96,15 @@ static void	handle_color_param(t_game *game, char *line, char *key, int *error)
 	if (line[i] == '\n' || line[i] == '\0')
 		return ;
 	color = ft_substr(line, i, j - i);
-	if (!color)
-		return ;
 	while (line[j] && ft_isspace(line[j]))
 		j++;
 	if (line[j] && line[j] != '\n')
+	{
+		free(color);
 		return ;
-	if (set_color(game, color, key))
-		return ;
-	*error = 0;
+	}
+	*error = set_color(game, color, key);
+	free(color);
 }
 
 int	handle_color(t_game *game, char *line)
@@ -123,7 +122,7 @@ int	handle_color(t_game *game, char *line)
 		handle_color_param(game, &line[i + 1], "C", &error);
 	if (error == 1)
 	{
-		write(2, "Error\nInvalid color setting\n", 29);
+		ft_free_init(game, "Invalid color setting");
 		return (1);
 	}
 	return (0);

@@ -242,3 +242,28 @@
    ...
    obj:*libstdc++.so*
 }
+{
+   ignore_nvidia_cond
+   Memcheck:Cond
+   obj:*/libnvidia-glcore.so*
+}
+{
+   ignore_nvidia_value8
+   Memcheck:Value8
+   obj:*/libnvidia-glcore.so*
+}
+{
+   ignore_nvidia_value4
+   Memcheck:Value4
+   obj:*/libnvidia-glcore.so*
+}
+{
+   ignore_glx_nvidia
+   Memcheck:Cond
+   obj:*/libGLX_nvidia.so*
+}
+{
+   ignore_glx_nvidia_value8
+   Memcheck:Value8
+   obj:*/libGLX_nvidia.so*
+}

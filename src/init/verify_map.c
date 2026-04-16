@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 11:56:44 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 17:11:49 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ int	verify_map(t_game *game)
 {
 	if (verify_char_map(game))
 	{
-		write(2, "Error\nInvalid map\n", 19);
+		ft_free_init(game, "Invalid map");
 		return (1);
 	}
 	if (verify_border(game))
 	{
-		write(2, "Error\nInvalid map\n", 19);
+		ft_free_init(game, "Invalid map");
 		return (1);
 	}
 	return (0);

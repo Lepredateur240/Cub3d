@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 11:26:33 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 16:59:11 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	set_texture_path(t_game *game, char *path, char *key)
 	char	**target;
 
 	target = NULL;
+	if (!path)
+		return (1);
 	if (strncmp(key, "NO", 2) == 0)
 		target = &game->data.path_text_north;
 	else if (strncmp(key, "SO", 2) == 0)
@@ -51,16 +53,16 @@ static void	handle_texture_path(t_game *game, char *line, char *key, int *error)
 	if (line[i] == '\n' || line[i] == '\0')
 		return ;
 	path = ft_substr(line, i, j - i);
-	if (!path)
-		return ;
 	while (line[j] && ft_isspace(line[j]))
 		j++;
 	if (line[j] && line[j] != '\n')
+	{
+		free(path);
 		return ;
-	if (set_texture_path(game, path, key))
-		*error = 1;
-	else
-		*error = 0;
+	}
+	*error = set_texture_path(game, path, key);
+	if (*error)
+		free(path);
 }
 
 int	handle_texture(t_game *game, char *line)
@@ -82,7 +84,7 @@ int	handle_texture(t_game *game, char *line)
 		handle_texture_path(game, &line[i + 2], "EA", &error);
 	if (error == 1)
 	{
-		write(2, "Error\nInvalid setting\n", 23);
+		ft_free_init(game, "Invalid setting");
 		return (1);
 	}
 	return (0);

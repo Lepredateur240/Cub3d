@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 11:21:18 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/16 17:45:34 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ int	copy_map(t_game *game)
 		return (1);
 	if (tmp_to_int(game))
 		return (1);
+	ft_ultimate_free("%a", &game->data.map_tmp);	
 	return (0);
 }
