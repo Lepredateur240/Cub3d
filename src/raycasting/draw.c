@@ -6,13 +6,13 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 19:30:21 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 09:59:56 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 13:42:24 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void calculate_texture_x(t_ray *ray, t_draw *draw)
+static void	calculate_texture_x(t_ray *ray, t_draw *draw)
 {
 	draw->wallX -= floor(draw->wallX);
 	draw->texX = (int)(draw->wallX * (double)draw->texWidth);
@@ -22,7 +22,8 @@ static void calculate_texture_x(t_ray *ray, t_draw *draw)
 		draw->texX = draw->texWidth - draw->texX - 1;
 }
 
-static void	texture_mapping(t_game *game, t_ray *ray, t_perp *perp, t_draw *draw)
+static void	texture_mapping(t_game *game, t_ray *ray,
+	t_perp *perp, t_draw *draw)
 {
 	draw->texWidth = 1024;
 	draw->texHeight = 1024;
@@ -45,22 +46,20 @@ static void	texture_mapping(t_game *game, t_ray *ray, t_perp *perp, t_draw *draw
 	else
 		draw->wallX = game->data.posX + perp->perpWallDist * ray->rayDirX;
 	calculate_texture_x(ray, draw);
-
 }
 
 static void	draw_wall_ceiling(t_game *game, t_perp *perp, int x, t_draw *draw)
 {
-	// --- PLAFOND ---
 	draw->y = 0;
 	while (draw->y < perp->drawStart)
 	{
-		// Couleur Bleu Ciel
-		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, draw->y, game->data.color_ceiling);
+		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image,
+			x, draw->y, game->data.color_ceiling);
 		draw->y++;
 	}
-	// --- MUR TEXTURÉ ---
 	draw->step = 1.0 * draw->texHeight / perp->lineHeight;
-	draw->texPos = (perp->drawStart - game->view.height / 2.0 + perp->lineHeight / 2.0) * draw->step;
+	draw->texPos = (perp->drawStart - game->view.height / 2.0
+			+ perp->lineHeight / 2.0) * draw->step;
 	draw->y = perp->drawStart;
 	while (draw->y < perp->drawEnd)
 	{
@@ -70,22 +69,25 @@ static void	draw_wall_ceiling(t_game *game, t_perp *perp, int x, t_draw *draw)
 		else if (draw->texY < 0)
 			draw->texY = 0;
 		draw->texPos += draw->step;
-		draw->color = mlx_get_image_pixel(game->mlx.mlx, draw->current_tex, draw->texX, draw->texY);
-		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, draw->y, draw->color);
+		draw->color = mlx_get_image_pixel(game->mlx.mlx,
+				draw->current_tex, draw->texX, draw->texY);
+		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image,
+			x, draw->y, draw->color);
 		draw->y++;
 	}
 }
 
 void	draw_textured_line(t_game *game, t_ray *ray, t_perp *perp, int x)
 {
-	t_draw draw;
+	t_draw	draw;
 
 	texture_mapping(game, ray, perp, &draw);
 	draw_wall_ceiling(game, perp, x, &draw);
 	draw.y = perp->drawEnd;
 	while (draw.y < game->view.height)
 	{
-		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image, x, draw.y, game->data.color_floor);
+		mlx_set_image_pixel(game->mlx.mlx, game->mlx.image,
+			x, draw.y, game->data.color_floor);
 		draw.y++;
 	}
 }

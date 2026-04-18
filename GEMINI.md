@@ -19,7 +19,7 @@ The project is modularized into specialized components:
   - `map_texture.c`, `map_color.c`: Processing texture paths and floor/ceiling colors.
   - `init_mlx.c`, `init_image.c`: Graphics context setup and asset loading.
   - `spawn.c`: Setting player's initial position and direction based on the map.
-- **`src/raystracing/`**: The core rendering engine:
+- **`src/raycasting/`**: The core rendering engine:
   - `to_3d.c`: Implements the DDA algorithm for raycasting.
   - `draw.c`: Vertical line drawing and texture mapping logic.
 - **`src/keyhook/`**: Manages player input and movement logic.
@@ -49,6 +49,6 @@ The project is modularized into specialized components:
 
 ## Key Files for Investigation
 - `includes/struct.h`: Main data structures for game state and raycasting.
-- `src/raystracing/to_3d.c`: Core DDA raycasting logic.
+- `src/raycasting/to_3d.c`: Core DDA raycasting logic.
 - `src/init/map.c`: Main entry for parsing logic.
 - `src/on_event/mlx_event.c`: Event loop and cleanup logic.

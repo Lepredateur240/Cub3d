@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 16:59:11 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 13:49:10 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int	set_texture_path(t_game *game, char *path, char *key)
 	target = NULL;
 	if (!path)
 		return (1);
-	if (strncmp(key, "NO", 2) == 0)
+	if (ft_strncmp(key, "NO", 2) == 0)
 		target = &game->data.path_text_north;
-	else if (strncmp(key, "SO", 2) == 0)
+	else if (ft_strncmp(key, "SO", 2) == 0)
 		target = &game->data.path_text_south;
-	else if (strncmp(key, "WE", 2) == 0)
+	else if (ft_strncmp(key, "WE", 2) == 0)
 		target = &game->data.path_text_west;
-	else if (strncmp(key, "EA", 2) == 0)
+	else if (ft_strncmp(key, "EA", 2) == 0)
 		target = &game->data.path_text_east;
 	if (target && !*target)
 	{
@@ -74,13 +74,13 @@ int	handle_texture(t_game *game, char *line)
 	error = 1;
 	while (ft_isspace(line[i]))
 		i++;
-	if (strncmp(&line[i], "NO", 2) == 0)
+	if (ft_strncmp(&line[i], "NO", 2) == 0)
 		handle_texture_path(game, &line[i + 2], "NO", &error);
-	else if (strncmp(&line[i], "SO", 2) == 0)
+	else if (ft_strncmp(&line[i], "SO", 2) == 0)
 		handle_texture_path(game, &line[i + 2], "SO", &error);
-	else if (strncmp(&line[i], "WE", 2) == 0)
+	else if (ft_strncmp(&line[i], "WE", 2) == 0)
 		handle_texture_path(game, &line[i + 2], "WE", &error);
-	else if (strncmp(&line[i], "EA", 2) == 0)
+	else if (ft_strncmp(&line[i], "EA", 2) == 0)
 		handle_texture_path(game, &line[i + 2], "EA", &error);
 	if (error == 1)
 	{

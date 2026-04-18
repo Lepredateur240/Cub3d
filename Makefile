@@ -38,11 +38,11 @@ SRCS        = $(SRCS_DIR)/main.c \
 			  $(SRCS_DIR)/init/map_color.c \
 			  $(SRCS_DIR)/init/init_image.c \
 			  $(SRCS_DIR)/init/spawn.c \
-              $(SRCS_DIR)/error/ft_perror.c \
-              $(SRCS_DIR)/on_event/mlx_event.c \
-			  $(SRCS_DIR)/raystracing/to_3d.c \
-			  $(SRCS_DIR)/raystracing/draw.c \
-			  $(SRCS_DIR)/keyhook/keyhook.c \
+              $(SRCS_DIR)/error/error.c \
+              $(SRCS_DIR)/event/mlx_event.c \
+			  $(SRCS_DIR)/event/keyhook.c \
+			  $(SRCS_DIR)/raycasting/to_3d.c \
+			  $(SRCS_DIR)/raycasting/draw.c \
 			  $(SRCS_DIR)/gnl/get_next_line.c \
 
 # Génère la structure des objets en miroir des sources

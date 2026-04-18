@@ -6,31 +6,29 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:07:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/14 14:05:44 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 13:57:47 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void render_frame(void *param)
+void	render_frame(void *param)
 {
-	t_game *game = (t_game *)param;
+	t_game	*game;
 
-	// 1. On lance le calcul du Raycasting
+	game = (t_game *)param;
 	to_3d(game);
-
 	update_player(game);
-	// 2. On affiche l'image sur la fenêtre
-	// (L'ordre des paramètres dépend de ta version de MacroLibX)
-	mlx_put_image_to_window(game->mlx.mlx, game->mlx.window, game->mlx.image, 0, 0);
+	mlx_put_image_to_window(game->mlx.mlx,
+		game->mlx.window, game->mlx.image, 0, 0);
 }
 
-void 	render_loop(void *param)
+void	render_loop(void *param)
 {
 	render_frame((t_game *)param);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_game	game;
 

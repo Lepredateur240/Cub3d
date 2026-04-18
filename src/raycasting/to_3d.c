@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:32:05 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 15:47:19 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 13:44:28 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ static void	launch_dda(t_game *game, t_ray *ray)
 static void	PerpWallDist(t_ray *ray, t_game *game, t_perp *perp)
 {
 	if (ray->side == 0)
-		perp->perpWallDist = (ray->mapX - game->data.posX + (1 - ray->stepX) / 2) / ray->rayDirX;
+		perp->perpWallDist = (ray->mapX - game->data.posX
+				+ (1 - ray->stepX) / 2) / ray->rayDirX;
 	else
-		perp->perpWallDist = (ray->mapY - game->data.posY + (1 - ray->stepY) / 2) / ray->rayDirY;
+		perp->perpWallDist = (ray->mapY - game->data.posY
+				+ (1 - ray->stepY) / 2) / ray->rayDirY;
 	perp->lineHeight = (int)(game->view.height / perp->perpWallDist);
-	
-	// Calcul des pixels de début et de fin de la ligne
 	perp->drawStart = -perp->lineHeight / 2 + game->view.height / 2;
 	if (perp->drawStart < 0)
 		perp->drawStart = 0;
@@ -89,6 +89,7 @@ static void	PerpWallDist(t_ray *ray, t_game *game, t_perp *perp)
 	if (perp->drawEnd >= game->view.height)
 		perp->drawEnd = game->view.height - 1;
 }
+
 void	to_3d(t_game *game)
 {
 	int			x;
@@ -104,14 +105,10 @@ void	to_3d(t_game *game)
 		ray.cameraX = 2 * x / (double)game->view.width - 1;
 		ray.rayDirX = game->data.dirX + game->data.planeX * ray.cameraX;
 		ray.rayDirY = game->data.dirY + game->data.planeY * ray.cameraX;
-		
 		dda(&ray, game);
 		launch_dda(game, &ray);
 		PerpWallDist(&ray, game, &perp);
-		
-		// Appel de la nouvelle fonction d'affichage
 		draw_textured_line(game, &ray, &perp, x);
-		
 		x++;
 	}
 }

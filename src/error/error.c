@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_perror.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:25:26 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 17:53:57 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 13:29:17 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_perror(const char *message)
 	perror(message);
 	exit(EXIT_FAILURE);
 }
+
 void	ft_free_init(t_game *game, char *error)
 {
 	if (error)

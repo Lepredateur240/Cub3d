@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 16:44:25 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 13:40:12 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ static int	read_cub_file(t_game *game, int fd)
 		}
 		free(line);
 	}
-	if (!game->data.path_text_north || !game->data.path_text_south || !game->data.path_text_east || !game->data.path_text_west)
+	if (!game->data.path_text_north || !game->data.path_text_south
+		|| !game->data.path_text_east || !game->data.path_text_west)
 	{
 		ft_free_init(game, "Invalid setting");
 		return (1);

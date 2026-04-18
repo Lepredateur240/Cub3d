@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 17:09:42 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 13:49:36 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ int	handle_color(t_game *game, char *line)
 	error = 1;
 	while (ft_isspace(line[i]))
 		i++;
-	if (strncmp(&line[i], "F", 1) == 0)
+	if (ft_strncmp(&line[i], "F", 1) == 0)
 		handle_color_param(game, &line[i + 1], "F", &error);
-	else if (strncmp(&line[i], "C", 1) == 0)
+	else if (ft_strncmp(&line[i], "C", 1) == 0)
 		handle_color_param(game, &line[i + 1], "C", &error);
 	if (error == 1)
 	{
