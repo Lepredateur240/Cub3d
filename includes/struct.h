@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:26:56 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 09:36:50 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 12:04:57 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_data
 	double	dirY; //initial direction vector
 	double	planeX; //the 2d raycaster version of camera plane
 	double	planeY; //the 2d raycaster version of camera plane
+	int		mouse_pos[2];
 	double	time; //time of current frame
 	double	oldTime; //time of previous frame
 	int     **map;

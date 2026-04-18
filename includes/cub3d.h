@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:29:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 15:48:01 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 11:06:43 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #include "struct.h"
 #include "prototype.h"
-#include "keypad.h"
+#include "setting.h"
 #include "../free/includes/free.h"
 #include "../mlx/includes/mlx_extended.h"
 #include "../mlx/includes/mlx_profile.h"

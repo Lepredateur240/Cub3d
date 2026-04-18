@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/05 19:30:21 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/15 16:48:51 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 09:59:56 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ static void	texture_mapping(t_game *game, t_ray *ray, t_perp *perp, t_draw *draw
 	if (ray->side == 0)
 	{
 		if (ray->rayDirX > 0)
-			draw->current_tex = game->data.tex_east;
-		else
 			draw->current_tex = game->data.tex_west;
+		else
+			draw->current_tex = game->data.tex_east;
 	}
 	else
 	{
 		if (ray->rayDirY > 0)
-			draw->current_tex = game->data.tex_south;
-		else
 			draw->current_tex = game->data.tex_north;
+		else
+			draw->current_tex = game->data.tex_south;
 	}
 	if (ray->side == 0)
 		draw->wallX = game->data.posY + perp->perpWallDist * ray->rayDirY;

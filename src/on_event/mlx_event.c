@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:48:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/16 18:00:48 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/18 12:43:01 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void run_game_loop(t_game *game)
     mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_KEYDOWN, key_hook_down, game);
     mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_KEYUP, key_hook_up, game);
 	mlx_on_event(game->mlx.mlx, game->mlx.window, MLX_WINDOW_EVENT, window_hook, game);
+	// mlx_mouse_hide(game->mlx.mlx);
     mlx_add_loop_hook(game->mlx.mlx, render_loop, game);
     mlx_loop(game->mlx.mlx);
 }
