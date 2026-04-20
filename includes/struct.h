@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:26:56 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/20 10:07:02 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 11:07:12 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,15 @@ typedef struct s_data
 	int			mouse_pos[2];
 	int			**map;
 	int			keys[1024];
-
 	char		*path_text_north;
 	char		*path_text_south;
 	char		*path_text_west;
 	char		*path_text_east;
-
 	mlx_color	color_floor;
 	mlx_color	color_ceiling;
-
 	char		**map_tmp;
-
 	int			map_width;
 	int			map_height;
-
 	void		*tex_north;
 	void		*tex_south;
 	void		*tex_east;
