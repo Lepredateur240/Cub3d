@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:13:20 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/20 10:06:54 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:29:18 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,22 @@ static void	init_app(t_game *game, mlx_window_create_info *info)
 	game->mlx.mlx = mlx_init();
 	if (!game->mlx.mlx)
 	{
-		ft_perror("Failed to initialize MLX");
-		exit(1);
+		write(2, "Error\nFailed to initialize MLX\n", 32);
+		cleanup_and_exit(game);
 	}
 	load_textures(game);
 	game->mlx.window = mlx_new_window(game->mlx.mlx, info);
 	if (!game->mlx.window)
 	{
-		ft_perror("Failed to create window");
-		exit(1);
+		write(2, "Error\nFailed to init mlx window\n", 33);
+		cleanup_and_exit(game);
 	}
 	mlx_mouse_hide(game->mlx.mlx);
 	game->mlx.image = mlx_new_image(game->mlx.mlx, info->width, info->height);
 	if (!game->mlx.image)
 	{
-		ft_perror("Failed to create image");
-		exit(1);
+		write(2, "Error\nFailed to init mlx image\n", 32);
+		cleanup_and_exit(game);
 	}
 }
 

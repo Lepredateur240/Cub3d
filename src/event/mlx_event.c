@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:48:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 13:30:52 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:18:07 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ void	cleanup_and_exit(t_game *game)
 		mlx_destroy_image(game->mlx.mlx, game->data.tex_east);
 	if (game->data.tex_west)
 		mlx_destroy_image(game->mlx.mlx, game->data.tex_west);
-	mlx_destroy_image(game->mlx.mlx, game->mlx.image);
+	if (game->mlx.mlx && game->mlx.image)
+		mlx_destroy_image(game->mlx.mlx, game->mlx.image);
 	ft_free_init(game, NULL);
-	mlx_destroy_window(game->mlx.mlx, game->mlx.window);
-	mlx_destroy_context(game->mlx.mlx);
+	if (game->mlx.mlx && game->mlx.window)
+		mlx_destroy_window(game->mlx.mlx, game->mlx.window);
+	if (game->mlx.mlx)
+		mlx_destroy_context(game->mlx.mlx);
 	exit(0);
 }
 

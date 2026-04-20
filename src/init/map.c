@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:26:00 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 13:40:12 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:54:02 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,11 @@ int	init_map(char **argv, t_game *game)
 	if (verify_cub_file(argv[1], &fd))
 		return (1);
 	if (read_cub_file(game, fd))
+	{
+		close(fd);
 		return (1);
+	}
+	close(fd);
 	if (verify_map(game))
 		return (1);
 	if (copy_map(game))

@@ -52,23 +52,23 @@ bonus: .bonus $(LIBFT_A) $(FREE_A) $(MLX_LIB) $(NAME)
 	@touch .bonus
 
 $(LIBFT_A):
-	@printf "Compilation de la libft...\n"
+	@printf "Compilation libft...\n"
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
-	@printf "libft compilée.\n"
+	@printf "libft OK.\n"
 
 $(FREE_A):
-	@printf "Compilation de la free...\n"
+	@printf "Compilation free...\n"
 	@$(MAKE) -C $(FREE_DIR) > /dev/null
-	@printf "free compilée.\n"
+	@printf "free OK.\n"
 
 $(MLX_LIB):
-	@printf "Compilation de la MacroLibX...\n"
-	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
-	@printf "MacroLibX compilée.\n"
+	@printf "Compilation MacroLibX...\n"
+	@$(MAKE) -j -C $(MLX_DIR) > /dev/null 2>&1
+	@printf "MacroLibX OK.\n"
 
 $(NAME): $(OBJ_DIR) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(FREE_A) $(LIBFT_A) $(MLX_LIB) -lSDL2 -lm -o $(NAME)
-	@printf "$(NAME) est prêt à lancer !\n"
+	@printf "$(NAME) is OK !\n"
 
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(@D)
@@ -82,14 +82,14 @@ clean:
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
 	@$(MAKE) clean -C $(MLX_DIR) > /dev/null 2>&1
 	@$(MAKE) clean -C $(FREE_DIR) > /dev/null
-	@printf "Fichiers objets supprimés.\n"
+	@printf "Obj deleted.\n"
 
 fclean: clean
 	@rm -f $(NAME) .bonus .manda
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
 	@$(MAKE) fclean -C $(MLX_DIR) > /dev/null 2>&1
 	@$(MAKE) fclean -C $(FREE_DIR) > /dev/null
-	@printf "$(NAME) et bibliothèques supprimés.\n"
+	@printf "$(NAME) and librairy deleted.\n"
 
 re: fclean all
 

@@ -6,17 +6,11 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:25:26 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 13:29:17 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:27:25 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	ft_perror(const char *message)
-{
-	perror(message);
-	exit(EXIT_FAILURE);
-}
 
 void	ft_free_init(t_game *game, char *error)
 {

@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/20 10:22:36 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:27:30 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 //error
 //error.c
-void	ft_perror(const char *message);
 void	ft_free_init(t_game *game, char *error);
 
 //event
