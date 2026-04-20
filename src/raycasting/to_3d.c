@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:32:05 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 13:44:28 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 11:05:40 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,42 @@
 
 static void	dda_step(t_ray *ray, t_game *game)
 {
-	if (ray->rayDirX < 0)
+	if (ray->ray_dir_x < 0)
 	{
-		ray->stepX = -1;
-		ray->sideDistX = (game->data.posX - ray->mapX) * ray->deltaDistX;
+		ray->step_x = -1;
+		ray->side_dist_x = (game->data.pos_x - ray->map_x) * ray->delta_dist_x;
 	}
 	else
 	{
-		ray->stepX = 1;
-		ray->sideDistX = (ray->mapX + 1.0 - game->data.posX) * ray->deltaDistX;
+		ray->step_x = 1;
+		ray->side_dist_x = (ray->map_x + 1.0 - game->data.pos_x)
+			* ray->delta_dist_x;
 	}
-	if (ray->rayDirY < 0)
+	if (ray->ray_dir_y < 0)
 	{
-		ray->stepY = -1;
-		ray->sideDistY = (game->data.posY - ray->mapY) * ray->deltaDistY;
+		ray->step_y = -1;
+		ray->side_dist_y = (game->data.pos_y - ray->map_y) * ray->delta_dist_y;
 	}
 	else
 	{
-		ray->stepY = 1;
-		ray->sideDistY = (ray->mapY + 1.0 - game->data.posY) * ray->deltaDistY;
+		ray->step_y = 1;
+		ray->side_dist_y = (ray->map_y + 1.0 - game->data.pos_y)
+			* ray->delta_dist_y;
 	}
 }
 
 static void	dda(t_ray *ray, t_game *game)
 {
-	ray->mapX = (int)game->data.posX;
-	ray->mapY = (int)game->data.posY;
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	ray->map_x = (int)game->data.pos_x;
+	ray->map_y = (int)game->data.pos_y;
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	ray->hit = 0;
 	dda_step(ray, game);
 }
@@ -56,38 +58,38 @@ static void	launch_dda(t_game *game, t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
-			ray->mapX += ray->stepX;
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
-			ray->mapY += ray->stepY;
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->data.map[ray->mapY][ray->mapX] > 0)
+		if (game->data.map[ray->map_y][ray->map_x] > 0)
 			ray->hit = 1;
 	}
 }
 
-static void	PerpWallDist(t_ray *ray, t_game *game, t_perp *perp)
+static void	perp_wall_dist(t_ray *ray, t_game *game, t_perp *perp)
 {
 	if (ray->side == 0)
-		perp->perpWallDist = (ray->mapX - game->data.posX
-				+ (1 - ray->stepX) / 2) / ray->rayDirX;
+		perp->perp_wall_dist = (ray->map_x - game->data.pos_x
+				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
-		perp->perpWallDist = (ray->mapY - game->data.posY
-				+ (1 - ray->stepY) / 2) / ray->rayDirY;
-	perp->lineHeight = (int)(game->view.height / perp->perpWallDist);
-	perp->drawStart = -perp->lineHeight / 2 + game->view.height / 2;
-	if (perp->drawStart < 0)
-		perp->drawStart = 0;
-	perp->drawEnd = perp->lineHeight / 2 + game->view.height / 2;
-	if (perp->drawEnd >= game->view.height)
-		perp->drawEnd = game->view.height - 1;
+		perp->perp_wall_dist = (ray->map_y - game->data.pos_y
+				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
+	perp->line_height = (int)(game->view.height / perp->perp_wall_dist);
+	perp->draw_start = -perp->line_height / 2 + game->view.height / 2;
+	if (perp->draw_start < 0)
+		perp->draw_start = 0;
+	perp->draw_end = perp->line_height / 2 + game->view.height / 2;
+	if (perp->draw_end >= game->view.height)
+		perp->draw_end = game->view.height - 1;
 }
 
 void	to_3d(t_game *game)
@@ -102,12 +104,12 @@ void	to_3d(t_game *game)
 	x = 0;
 	while (x < game->view.width)
 	{
-		ray.cameraX = 2 * x / (double)game->view.width - 1;
-		ray.rayDirX = game->data.dirX + game->data.planeX * ray.cameraX;
-		ray.rayDirY = game->data.dirY + game->data.planeY * ray.cameraX;
+		ray.camera_x = 2 * x / (double)game->view.width - 1;
+		ray.ray_dir_x = game->data.dir_x + game->data.plane_x * ray.camera_x;
+		ray.ray_dir_y = game->data.dir_y + game->data.plane_y * ray.camera_x;
 		dda(&ray, game);
 		launch_dda(game, &ray);
-		PerpWallDist(&ray, game, &perp);
+		perp_wall_dist(&ray, game, &perp);
 		draw_textured_line(game, &ray, &perp, x);
 		x++;
 	}

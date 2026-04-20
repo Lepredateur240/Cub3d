@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:13:20 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 14:01:37 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 10:06:54 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 static void	init_data_view(t_game *game, mlx_window_create_info *info)
 {
-	game->data.time = 0;
-	game->data.oldTime = 0;
 	info->width = 1280;
 	info->height = 1024;
 	info->title = "Cub3D";

@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:07:12 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 13:57:47 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 10:12:04 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	render_frame(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	to_3d(game);
 	update_player(game);
+	to_3d(game);
 	mlx_put_image_to_window(game->mlx.mlx,
 		game->mlx.window, game->mlx.image, 0, 0);
 }

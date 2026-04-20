@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:26:56 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/20 09:55:37 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 10:07:02 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@
 
 typedef struct s_data
 {
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 	int			mouse_pos[2];
-	double		time;
-	double		oldTime;
 	int			**map;
 	int			keys[1024];
 
@@ -70,40 +68,40 @@ typedef struct s_game
 
 typedef struct s_ray
 {
-	double	cameraX;
-	double	rayDirX;
-	double	rayDirY;
-	int		mapX;
-	int		mapY;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
-	int		stepX;
-	int		stepY;
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
 	int		side;
 	int		hit;
 }			t_ray;
 
 typedef struct s_perp
 {
-	double	perpWallDist;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
+	double	perp_wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }			t_perp;
 
 typedef struct s_draw
 {
-	double		wallX;
-	int			texX;
-	int			texY;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
 	double		step;
-	double		texPos;
+	double		tex_pos;
 	void		*current_tex;
 	int			y;
-	int			texWidth;
-	int			texHeight;
+	int			tex_width;
+	int			tex_height;
 	mlx_color	color;
 }			t_draw;
 

@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 19:58:54 by algasnie          #+#    #+#             */
-/*   Updated: 2026/04/14 13:13:10 by algasnie         ###   ########.fr       */
+/*   Created: 2026/04/03 18:36:44 by masenche          #+#    #+#             */
+/*   Updated: 2026/04/20 11:04:33 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "cub3d.h"
 
-# include <unistd.h>
-# include <stdlib.h>
+void	handle_mouse(t_game *game)
+{
+	int	x;
+	int	y;
+	int	center_x;
+	int	center_y;
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
-
-char	*get_next_line(int fd);
-
-#endif
+	if (BONUS == 0)
+		return ;
+	center_x = game->view.width / 2;
+	center_y = game->view.height / 2;
+	mlx_mouse_get_pos(game->mlx.mlx, &x, &y);
+	if (x != center_x)
+	{
+		rotate_player(game, (x - center_x) * MOUSE_SEN);
+		mlx_mouse_move(game->mlx.mlx, game->mlx.window, center_x, center_y);
+	}
+}

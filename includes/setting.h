@@ -6,14 +6,18 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:28:32 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/20 09:47:59 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 10:23:53 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETTING_H
 # define SETTING_H
 
-# define SPEED			0.05
+# ifndef BONUS
+#  define BONUS 0
+# endif
+
+# define SPEED			0.07
 # define MOUSE_SEN		0.002
 # define HITBOX			0.25
 

@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/20 09:52:17 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 10:22:36 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	update_player(t_game *game);
 // mlx_event.c
 void	run_game_loop(t_game *game);
 void	cleanup_and_exit(t_game *game);
+void	rotate_player(t_game *game, double angle);
+// mouse.c
+void	handle_mouse(t_game *game);
 
 //gnl
 //gnl.c

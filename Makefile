@@ -1,32 +1,19 @@
-# --- Couleurs et Styles ---
-GREEN       = \033[1;32m
-RED         = \033[1;31m
-YELLOW      = \033[1;33m
-CYAN        = \033[1;36m
-RESET       = \033[0m
-
-# --- Configuration du Projet ---
 NAME        = cub3D
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror
+CFLAGS_BONUS = -Wall -Wextra -Werror -DBONUS=1
 
-# --- Configuration LIBFT ---
 LIBFT_DIR   = libft
 LIBFT_A     = $(LIBFT_DIR)/libft.a
 
-# --- Configuration MLX (MacroLibX) ---
 MLX_DIR     = mlx
 MLX_LIB     = $(MLX_DIR)/libmlx.so
 
-# --- Configuration FREE ---
 FREE_DIR    = free
 FREE_A      = $(FREE_DIR)/ft_free.a
 
-# --- Inclusions ---
-# -I permet au compilateur de trouver les fichiers .h
-INCLUDES    = -I includes -I $(LIBFT_DIR) -I $(MLX_DIR)/includes -I $(FREE_DIR) -I src/gnl
+INCLUDES    = -I includes -I $(LIBFT_DIR) -I $(MLX_DIR)/includes -I $(FREE_DIR)
 
-# --- Sources et Objets ---
 SRCS_DIR    = src
 SRCS        = $(SRCS_DIR)/main.c \
               $(SRCS_DIR)/init/init_mlx.c \
@@ -41,78 +28,69 @@ SRCS        = $(SRCS_DIR)/main.c \
               $(SRCS_DIR)/error/error.c \
               $(SRCS_DIR)/event/mlx_event.c \
 			  $(SRCS_DIR)/event/keyhook.c \
+			  $(SRCS_DIR)/event/mouse.c \
 			  $(SRCS_DIR)/raycasting/to_3d.c \
 			  $(SRCS_DIR)/raycasting/draw.c \
 			  $(SRCS_DIR)/gnl/get_next_line.c \
 
-# Génère la structure des objets en miroir des sources
 OBJ_DIR     = obj
 OBJS        = $(SRCS:$(SRCS_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-# --- Logique de la barre de progression ---
-TOTAL_FILES  := $(words $(SRCS))
-CURRENT_FILE := 0
+all: .manda $(LIBFT_A) $(FREE_A) $(MLX_LIB) $(NAME)
 
-define progress_bar
-    @$(eval CURRENT_FILE=$(shell echo $$(($(CURRENT_FILE) + 1))))
-    @$(eval PERCENT=$(shell echo $$(($(CURRENT_FILE) * 100 / $(TOTAL_FILES)))))
-    @printf "\r$(CYAN)Compilation de $(NAME) : [%-20s] %d%% $(RESET)" \
-        "$$(printf '#%.0s' $$(seq 1 $$(($(PERCENT) / 5))))" "$(PERCENT)"
-endef
+bonus: CFLAGS = $(CFLAGS_BONUS)
+bonus: .bonus $(LIBFT_A) $(FREE_A) $(MLX_LIB) $(NAME)
 
-# --- Règles Principales ---
+.manda:
+	@if [ -f .bonus ]; then rm -rf $(OBJ_DIR) $(NAME); fi
+	@rm -f .bonus
+	@touch .manda
 
-all: $(LIBFT_A) $(FREE_A) $(MLX_LIB) $(NAME)
+.bonus:
+	@if [ -f .manda ]; then rm -rf $(OBJ_DIR) $(NAME); fi
+	@rm -f .manda
+	@touch .bonus
 
-# Compilation de la Libft
 $(LIBFT_A):
-	@printf "$(CYAN)Compilation de la libft...$(RESET)\n"
+	@printf "Compilation de la libft...\n"
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
-	@printf "$(GREEN)✅ libft compilée !$(RESET)\n"
+	@printf "libft compilée.\n"
 
-# Compilation de ft_free
 $(FREE_A):
-	@printf "$(CYAN)Compilation de la free...$(RESET)\n"
+	@printf "Compilation de la free...\n"
 	@$(MAKE) -C $(FREE_DIR) > /dev/null
-	@printf "$(GREEN)✅ free compilée !$(RESET)\n"
+	@printf "free compilée.\n"
 
-# Compilation de la MLX
 $(MLX_LIB):
-	@printf "$(CYAN)Compilation de la MacroLibX...$(RESET)\n"
+	@printf "Compilation de la MacroLibX...\n"
 	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
-	@printf "$(GREEN)✅ MacroLibX compilée !$(RESET)\n"
+	@printf "MacroLibX compilée.\n"
 
-# Linkage final (Méthode Directe)
-# On passe les chemins des .a et .so directement comme des fichiers objets
 $(NAME): $(OBJ_DIR) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(FREE_A) $(LIBFT_A) $(MLX_LIB) -lSDL2 -lm -o $(NAME)
-	@printf "\n$(GREEN)✅ $(NAME) est prêt !$(RESET)\n"
+	@printf "$(NAME) est prêt à lancer !\n"
 
-# Compilation des fichiers objets (.o)
 $(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(@D)
-	@$(call progress_bar)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-# --- Nettoyage ---
-
 clean:
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null
 	@$(MAKE) clean -C $(MLX_DIR) > /dev/null 2>&1
-	@printf "$(YELLOW)🧹 Fichiers objets supprimés.$(RESET)\n"
+	@$(MAKE) clean -C $(FREE_DIR) > /dev/null
+	@printf "Fichiers objets supprimés.\n"
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) .bonus .manda
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null
+	@$(MAKE) fclean -C $(MLX_DIR) > /dev/null 2>&1
 	@$(MAKE) fclean -C $(FREE_DIR) > /dev/null
-	@printf "$(RED)🗑️  $(NAME), libft.a et ft_free.a supprimés.$(RESET)\n"
+	@printf "$(NAME) et bibliothèques supprimés.\n"
 
 re: fclean all
 
-val: all
-	valgrind --suppressions=valgrind.supp --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes  ./cub3D
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
