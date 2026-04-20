@@ -6,47 +6,47 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:26:56 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 12:04:57 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 09:55:37 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-#include "../mlx/includes/mlx.h"
+# include "../mlx/includes/mlx.h"
 
 typedef struct s_data
 {
-	double	posX; //x start position
-	double	posY; //y start position
-	double	dirX; //initial direction vector
-	double	dirY; //initial direction vector
-	double	planeX; //the 2d raycaster version of camera plane
-	double	planeY; //the 2d raycaster version of camera plane
-	int		mouse_pos[2];
-	double	time; //time of current frame
-	double	oldTime; //time of previous frame
-	int     **map;
-	int keys[1024];
+	double		posX;
+	double		posY;
+	double		dirX;
+	double		dirY;
+	double		planeX;
+	double		planeY;
+	int			mouse_pos[2];
+	double		time;
+	double		oldTime;
+	int			**map;
+	int			keys[1024];
 
-	char	*path_text_north;
-	char	*path_text_south;
-	char	*path_text_west;
-	char	*path_text_east;
-	
+	char		*path_text_north;
+	char		*path_text_south;
+	char		*path_text_west;
+	char		*path_text_east;
+
 	mlx_color	color_floor;
 	mlx_color	color_ceiling;
 
-	char	**map_tmp;
+	char		**map_tmp;
 
-	int		map_width;
-	int		map_height;
-	
-	void	*tex_north;
-	void	*tex_south;
-	void	*tex_east;
-	void	*tex_west;
-}			t_data;
+	int			map_width;
+	int			map_height;
+
+	void		*tex_north;
+	void		*tex_south;
+	void		*tex_east;
+	void		*tex_west;
+}				t_data;
 
 typedef struct s_view
 {
@@ -56,10 +56,10 @@ typedef struct s_view
 
 typedef struct s_mlx
 {
-	mlx_context mlx;
-	mlx_window window;
-	mlx_image image;
-}			t_mlx;
+	mlx_context	mlx;
+	mlx_window	window;
+	mlx_image	image;
+}				t_mlx;
 
 typedef struct s_game
 {
@@ -68,7 +68,8 @@ typedef struct s_game
 	t_view	view;
 }			t_game;
 
-typedef struct s_ray {
+typedef struct s_ray
+{
 	double	cameraX;
 	double	rayDirX;
 	double	rayDirY;
@@ -82,7 +83,7 @@ typedef struct s_ray {
 	int		stepY;
 	int		side;
 	int		hit;
-} 			t_ray;
+}			t_ray;
 
 typedef struct s_perp
 {

@@ -6,16 +6,16 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:28:32 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 13:50:28 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 09:47:59 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SETTING_H
 # define SETTING_H
 
-# define speed			0.05
-# define mouse_sen		0.002
-# define hitBox			0.25
+# define SPEED			0.05
+# define MOUSE_SEN		0.002
+# define HITBOX			0.25
 
 # define KEY_W			26
 # define KEY_A			4

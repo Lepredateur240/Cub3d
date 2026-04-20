@@ -6,7 +6,7 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 18:36:44 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 13:37:03 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 09:49:13 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ static void	move_player(t_game *game, double dir_x, double dir_y)
 	secur_x = 0;
 	secur_y = 0;
 	if (dir_x > 0)
-		secur_x = hitBox;
+		secur_x = HITBOX;
 	else if (dir_x < 0)
-		secur_x = -hitBox;
+		secur_x = -HITBOX;
 	if (dir_y > 0)
-		secur_y = hitBox;
+		secur_y = HITBOX;
 	else if (dir_y < 0)
-		secur_y = -hitBox;
+		secur_y = -HITBOX;
 	if (game->data.map[(int)game->data.posY]
 		[(int)(game->data.posX + dir_x + secur_x)] == 0)
 		game->data.posX += dir_x;
@@ -84,7 +84,7 @@ static void	handle_mouse(t_game *game)
 			game->view.width / 2, game->view.height / 2);
 	mlx_mouse_get_pos(game->mlx.mlx, &x, &y);
 	if ((x - game->data.mouse_pos[0]) != 0)
-		rotate_player(game, (x - game->data.mouse_pos[0]) * mouse_sen);
+		rotate_player(game, (x - game->data.mouse_pos[0]) * MOUSE_SEN);
 	game->data.mouse_pos[0] = x;
 	game->data.mouse_pos[1] = y;
 	if (x <= margin || x >= game->view.width - margin
@@ -101,12 +101,12 @@ void	update_player(t_game *game)
 {
 	double	move_speed;
 
-	move_speed = speed;
+	move_speed = SPEED;
 	if ((game->data.keys[KEY_W]
 			&& (game->data.keys[KEY_D] || game->data.keys[KEY_A]))
 		|| (game->data.keys[KEY_S]
 			&& (game->data.keys[KEY_D] || game->data.keys[KEY_A])))
-		move_speed = speed / 1.41;
+		move_speed = SPEED / 1.41;
 	if (game->data.keys[KEY_W])
 		move_player(game, game->data.dirX * move_speed,
 			game->data.dirY * move_speed);
@@ -120,8 +120,8 @@ void	update_player(t_game *game)
 		move_player(game, game->data.dirY * move_speed,
 			game->data.dirX * -move_speed);
 	if (game->data.keys[KEY_RIGHT])
-		rotate_player(game, speed);
+		rotate_player(game, SPEED);
 	if (game->data.keys[KEY_LEFT])
-		rotate_player(game, -speed);
+		rotate_player(game, -SPEED);
 	handle_mouse(game);
 }

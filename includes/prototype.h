@@ -6,14 +6,14 @@
 /*   By: algasnie <algasnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 16:27:10 by masenche          #+#    #+#             */
-/*   Updated: 2026/04/18 13:56:21 by algasnie         ###   ########.fr       */
+/*   Updated: 2026/04/20 09:52:17 by algasnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPE_H
 # define PROTOTYPE_H
 
-#include "libft.h"
+# include "libft.h"
 // Prototypes for all functions used in the project
 
 //error
@@ -36,25 +36,24 @@ char	*get_next_line(int fd);
 
 // init
 //copy_map.c
-int copy_map(t_game *game);
+int		copy_map(t_game *game);
 //handle_map.c
-int handle_map(t_game *game, char* line);
+int		handle_map(t_game *game, char *line);
 // init_image.c
 void	init_image(t_game *game, t_ray *ray, t_perp *perp, int x);
 void	load_textures(t_game *game);
 // init_mlx.c
-void	init_mlx(char** argv, t_game *game);
+void	init_mlx(char **argv, t_game *game);
 //map_color.c
-int handle_color(t_game *game, char* line);
+int		handle_color(t_game *game, char *line);
 //map_texture.c
-int handle_texture(t_game *game, char* line);
+int		handle_texture(t_game *game, char *line);
 //map.c
-int init_map(char** argv, t_game *game);
+int		init_map(char **argv, t_game *game);
 // spawn.c
-void spawn_player(t_game *game, double x, double y, char o);
+void	spawn_player(t_game *game, double x, double y, char o);
 //verify_map.c
-int verify_map(t_game *game);
-
+int		verify_map(t_game *game);
 
 // /raycasting
 // draw.c
@@ -64,6 +63,6 @@ void	to_3d(t_game *game);
 
 //main.c
 void	render_frame(void *param);
-void 	render_loop(void *param);
+void	render_loop(void *param);
 
 #endif
